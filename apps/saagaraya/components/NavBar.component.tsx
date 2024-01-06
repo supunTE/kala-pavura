@@ -1,25 +1,26 @@
+import { Button, Input } from '@mantine/core';
 import cs from 'classnames';
 import Image from 'next/image';
+
 import logo from '../assets/images/logo.png';
-import { Button, Input } from '@mantine/core';
 
 export function NavBar() {
+  if (typeof window !== 'undefined') console.log('window', window);
+
   return (
     <div
       className={cs(
         'absolute inset-0 py-4 px-8',
-        'flex items-start justify-center gap-6'
-      )}
-    >
+        'flex items-start justify-center gap-6',
+      )}>
       <div
         className={cs(
           'bg-zinc-700/40 backdrop-blur-md',
           'p-3',
           'rounded-full',
           'border border-zinc-400/20',
-          'h-16'
-        )}
-      >
+          'h-16',
+        )}>
         <Image
           src={logo}
           alt="logo"
@@ -35,9 +36,8 @@ export function NavBar() {
           'bg-zinc-700/40 backdrop-blur-md',
           'rounded-full',
           'flex items-center justify-end gap-6',
-          'relative overflow-hidden'
-        )}
-      >
+          'relative overflow-hidden',
+        )}>
         <Input
           size="xs"
           radius="xl"
@@ -49,8 +49,7 @@ export function NavBar() {
           color="#2da1e4"
           size="xs"
           radius="xl"
-          className={cs('z-20')}
-        >
+          className={cs('z-20')}>
           එක් වන්න
         </Button>
 
@@ -61,7 +60,7 @@ export function NavBar() {
             'w-10 h-full',
             'blur-lg',
             'left-0',
-            'animate-move-right'
+            'animate-move-right',
           )}
         />
       </nav>

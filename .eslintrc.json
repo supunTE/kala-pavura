@@ -1,7 +1,8 @@
 {
   "root": true,
   "ignorePatterns": ["**/*"],
-  "plugins": ["@nx"],
+  "plugins": ["@nx", "sort-exports", "simple-import-sort", "unused-imports"],
+  "extends": ["eslint:recommended", "prettier"],
   "overrides": [
     {
       "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
@@ -16,6 +17,45 @@
                 "sourceTag": "*",
                 "onlyDependOnLibsWithTags": ["*"]
               }
+            ]
+          }
+        ],
+        "no-lonely-if": "error",
+        "curly": ["error", "multi-line"],
+        "unused-imports/no-unused-imports": "error",
+        "no-unused-vars": "off",
+        "unused-imports/no-unused-vars": [
+          "warn",
+          {
+            "varsIgnorePattern": "^_",
+            "argsIgnorePattern": "^_"
+          }
+        ],
+        "simple-import-sort/imports": [
+          "error",
+          {
+            "groups": [
+              // Packages
+              ["^react", "^@", "^\\w"],
+
+              // Side effect imports.
+              ["^\\u0000"],
+
+              // Next absolute imports.
+              ["^@/"],
+
+              // parent imports. (`../../file`),
+              // sibling imports (`..` or `../`)
+              ["^\\.\\.(?!/?$)", "^\\.\\./?$"],
+
+              // Relative imports:
+              // subdirectories (./folder/file),
+              // hidden directories (.folder/file) or hidden files (.file),
+              // current directory (. or ./)
+              ["^\\./(?=.*/)(?!/?$)", "^\\.(?!/?$)", "^\\./?$"],
+
+              // Style imports.
+              ["^.+\\.?(css|scss)$"]
             ]
           }
         ]

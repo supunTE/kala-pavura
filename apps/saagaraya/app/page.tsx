@@ -1,11 +1,13 @@
+import { createTheme, MantineProvider } from '@mantine/core';
+import cs from 'classnames';
 import Image from 'next/image';
+
+import { notoSerifSinhala } from '../assets/fonts/fonts';
 import bg_image from '../assets/images/background.jpg';
 import saagaraya_wave_image from '../assets/images/saagaraya-logo.png';
-import cs from 'classnames';
-import { notoSerifSinhala } from '../assets/fonts/fonts';
-import '@mantine/core/styles.css';
-import { createTheme, MantineProvider } from '@mantine/core';
 import { NavBar } from '../components';
+
+import '@mantine/core/styles.css';
 
 const theme = createTheme({});
 
@@ -16,8 +18,7 @@ export default async function Index() {
         <NavBar />
 
         <div
-          className={cs('w-full h-full', 'flex justify-center items-center')}
-        >
+          className={cs('w-full h-full', 'flex justify-center items-center')}>
           <Image
             src={saagaraya_wave_image}
             width={500}
@@ -33,7 +34,7 @@ export default async function Index() {
           className={cs(
             'z-[-5] absolute',
             'h-full w-full inset-0',
-            'bg-zinc-900/60'
+            'bg-zinc-900/60',
           )}
         />
         <Image

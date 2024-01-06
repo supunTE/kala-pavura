@@ -1,7 +1,7 @@
-import { Noto_Serif_Sinhala } from "next/font/google"
+import { Noto_Serif_Sinhala } from 'next/font/google';
 
 export const notoSerifSinhala = Noto_Serif_Sinhala({
-  subsets: ["sinhala"],
-  display: "swap",
-  weight: ['200', '400', '700']
-})
+  subsets: ['sinhala'],
+  display: 'swap',
+  weight: ['200', '400', '700'],
+});
