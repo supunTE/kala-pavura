@@ -4,7 +4,6 @@ const { join } = require('path');
 const { createGlobPatternsForDependencies } = require('@nrwl/next/tailwind');
 
 module.exports = {
-  mode: 'jit',
   presets: [require('../../tailwind-workspace-preset.js')],
   content: [
     join(__dirname, 'app/**/*.{js,ts,jsx,tsx}'),
@@ -12,8 +11,18 @@ module.exports = {
     ...createGlobPatternsForDependencies(__dirname),
   ],
   theme: {
-    extend: {},
+    extend: {
+      animation: {
+        'move-right': 'moveRight 15s linear infinite',
+      },
+      keyframes: {
+        moveRight: {
+          '0%': { left: '-20%' },
+          '5%': { left: '120%' },
+          '100%': { left: '120%' },
+        },
+      },
+    },
   },
   plugins: [],
-}
-
+};

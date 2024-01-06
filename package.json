@@ -8,7 +8,6 @@
   "private": true,
   "dependencies": {
     "@mantine/core": "^7.4.0",
-    "@next/font": "^14.0.4",
     "@nx/next": "17.2.8",
     "@phosphor-icons/react": "^2.0.15",
     "@tailwindcss/typography": "^0.5.10",
