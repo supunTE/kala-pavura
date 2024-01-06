@@ -2,9 +2,10 @@ import { createTheme, MantineProvider } from '@mantine/core';
 import cs from 'classnames';
 import Image from 'next/image';
 
-import { notoSerifSinhala } from '../assets/fonts/fonts';
-import bg_image from '../assets/images/background.jpg';
-import saagaraya_wave_image from '../assets/images/saagaraya-logo.png';
+import { notoSerifSinhala } from '@/assets/fonts';
+import bg_image from '@/assets/images/background.jpg';
+import saagaraya_wave_image from '@/assets/images/saagaraya-logo.png';
+
 import { NavBar } from '../components';
 
 import '@mantine/core/styles.css';
