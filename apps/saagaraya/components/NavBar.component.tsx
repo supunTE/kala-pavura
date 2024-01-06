@@ -1,18 +1,70 @@
-import cs from "classnames";
-import Image from "next/image";
-import logo from "../assets/images/logo.png"
-import { Button } from "@mantine/core";
+import cs from 'classnames';
+import Image from 'next/image';
+import logo from '../assets/images/logo.png';
+import { Button, Input } from '@mantine/core';
 
 export function NavBar() {
-    return (
-        <div className={cs("absolute inset-0 py-6 px-12", 'flex items-start justify-center gap-20')}>
-             <Image src={logo} alt="logo" width={60} />
-            <nav className={cs('h-16 w-full', 'border border-zinc-400/20', 'bg-zinc-700/40 backdrop-blur-md', 'rounded-full' )}>
-                <div className={cs('bg-gray-800/0 backdrop-blur-lg', 'rounded-2xl', 'p-4', 'flex justify-end items-center gap-4')}>
-                   <Button variant="filled" color="#2da1e4" size="xs" radius="xl">එක් වන්න</Button>
-                </div>
+  return (
+    <div
+      className={cs(
+        'absolute inset-0 py-4 px-8',
+        'flex items-start justify-center gap-6'
+      )}
+    >
+      <div
+        className={cs(
+          'bg-zinc-700/40 backdrop-blur-md',
+          'p-3',
+          'rounded-full',
+          'border border-zinc-400/20',
+          'h-16'
+        )}
+      >
+        <Image
+          src={logo}
+          alt="logo"
+          className={cs('h-full w-min', 'object-contain')}
+        />
+      </div>
 
-            </nav>
-        </div>
-    )
+      <nav
+        className={cs(
+          'h-16 w-full',
+          'px-4',
+          'border border-zinc-400/20',
+          'bg-zinc-700/40 backdrop-blur-md',
+          'rounded-full',
+          'flex items-center justify-end gap-6',
+          'relative overflow-hidden'
+        )}
+      >
+        <Input
+          size="xs"
+          radius="xl"
+          placeholder="කිමිදෙන්න"
+          className={cs('w-80', 'z-20')}
+        />
+        <Button
+          variant="filled"
+          color="#2da1e4"
+          size="xs"
+          radius="xl"
+          className={cs('z-20')}
+        >
+          එක් වන්න
+        </Button>
+
+        <div
+          className={cs(
+            'absolute inset-y-0 skew-x-12',
+            'bg-gray-400/50',
+            'w-10 h-full',
+            'blur-lg',
+            'left-0',
+            'animate-move-right'
+          )}
+        />
+      </nav>
+    </div>
+  );
 }

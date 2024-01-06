@@ -14,7 +14,7 @@ export default async function Index() {
     <MantineProvider theme={theme}>
       <div className={cs(notoSerifSinhala.className, 'h-full')}>
         <NavBar />
-    
+
         <div
           className={cs('w-full h-full', 'flex justify-center items-center')}
         >
@@ -22,9 +22,9 @@ export default async function Index() {
             src={saagaraya_wave_image}
             width={500}
             height={300}
-            alt="background"            
+            alt="background"
             priority={true}
-            className={cs('backdrop-filter backdrop-hue-rotate-15')}
+            className={cs('backdrop-filter')}
           />
         </div>
         {/* සාගරය */}
