@@ -1,4 +1,4 @@
-import {Noto_Serif_Sinhala} from "next/font/google"
+import { Noto_Serif_Sinhala } from "next/font/google"
 
 export const notoSerifSinhala = Noto_Serif_Sinhala({
   subsets: ["sinhala"],
