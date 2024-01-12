@@ -1,4 +1,7 @@
+'use client';
+
 import { Button, Input } from '@mantine/core';
+import { CaretRight, MagnifyingGlass } from '@phosphor-icons/react';
 import cs from 'classnames';
 import Image from 'next/image';
 
@@ -43,13 +46,15 @@ export function NavBar() {
           radius="xl"
           placeholder="කිමිදෙන්න"
           className={cs('w-80', 'z-20')}
+          leftSection={<MagnifyingGlass size={14} weight="light" />}
         />
         <Button
           variant="filled"
           color="#2da1e4"
           size="xs"
           radius="xl"
-          className={cs('z-20')}>
+          className={cs('z-20')}
+          rightSection={<CaretRight size={16} weight="light" />}>
           එක් වන්න
         </Button>
 
