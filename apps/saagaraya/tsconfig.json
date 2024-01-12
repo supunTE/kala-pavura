@@ -3,15 +3,9 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@/assets/*": [
-        "assets/*"
-      ],
-      "@/components/*": [
-        "components/*"
-      ],
-      "@/modules/*": [
-        "modules/*"
-      ]
+      "@/assets/*": ["assets/*"],
+      "@/components/*": ["components/*"],
+      "@/modules/*": ["modules/*"]
     },
     "jsx": "preserve",
     "allowJs": true,
@@ -28,10 +22,7 @@
         "name": "next"
       }
     ],
-    "types": [
-      "jest",
-      "node"
-    ]
+    "types": ["jest", "node"]
   },
   "include": [
     "**/*.ts",
