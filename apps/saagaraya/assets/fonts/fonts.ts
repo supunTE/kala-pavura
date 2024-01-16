@@ -1,5 +1,4 @@
-import { DisplayLanguage } from '@kala-pavura/models';
-import { LanguageFonts } from '@kala-pavura/models/src/lib/frontend/fonts';
+import { DisplayLanguage, LanguageFonts } from '@kala-pavura/models';
 import {
   Noto_Sans_Sinhala,
   Noto_Serif_Sinhala,
