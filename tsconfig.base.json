@@ -14,7 +14,15 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@/assets/*": ["apps/saagaraya/assets/*"],
+      "@/components/*": ["apps/saagaraya/components/*"],
+      "@/modules/*": ["apps/saagaraya/modules/*"],
+      "@kala-pavura/constants": ["libs/constants/src/index.ts"],
+      "@kala-pavura/db": ["libs/db/src/index.ts"],
+      "@kala-pavura/models": ["libs/models/src/index.ts"],
+      "@kala-pavura/services": ["libs/services/src/index.ts"]
+    }
   },
   "exclude": ["node_modules", "tmp", "dist/**/*"]
 }

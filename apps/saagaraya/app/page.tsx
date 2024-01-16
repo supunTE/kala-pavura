@@ -1,51 +1,58 @@
+import { DisplayLanguage } from '@kala-pavura/models';
 import { createTheme, MantineProvider } from '@mantine/core';
 import cs from 'classnames';
 import Image from 'next/image';
 
-import { notoSerifSinhala } from '@/assets/fonts';
+import { notoSansSinhala } from '@/assets/fonts';
 import bg_image from '@/assets/images/background.jpg';
 import saagaraya_wave_image from '@/assets/images/saagaraya-logo.png';
+import { useFontStatic } from '@/modules/hooks/useFontStatic';
 
-import { NavBar } from '../components';
+import { Navbar } from '../components';
+
+import { Providers } from './Providers';
 
 import '@mantine/core/styles.css';
 
-const theme = createTheme({});
+const theme = createTheme({
+  fontFamily: notoSansSinhala.style.fontFamily,
+});
 
 export default async function Index() {
-  return (
-    <MantineProvider theme={theme}>
-      <div className={cs(notoSerifSinhala.className, 'h-full')}>
-        <NavBar />
+  const { primaryFont } = useFontStatic(DisplayLanguage.Sinhala);
 
-        <div
-          className={cs('w-full h-full', 'flex justify-center items-center')}>
+  return (
+    <Providers>
+      <MantineProvider theme={theme}>
+        <div className={cs(primaryFont.className, 'h-full')}>
+          <Navbar />
+          <div
+            className={cs('w-full h-full', 'flex justify-center items-center')}>
+            <Image
+              src={saagaraya_wave_image}
+              width={500}
+              height={300}
+              alt="background"
+              priority={true}
+              className={cs('backdrop-filter')}
+            />
+          </div>
+          <div
+            className={cs(
+              'z-[-5] absolute',
+              'h-full w-full inset-0',
+              'bg-zinc-900/60',
+            )}
+          />
           <Image
-            src={saagaraya_wave_image}
-            width={500}
-            height={300}
+            src={bg_image}
+            fill={true}
             alt="background"
             priority={true}
-            className={cs('backdrop-filter')}
+            className={'-z-10'}
           />
         </div>
-        {/* සාගරය */}
-
-        <div
-          className={cs(
-            'z-[-5] absolute',
-            'h-full w-full inset-0',
-            'bg-zinc-900/60',
-          )}
-        />
-        <Image
-          src={bg_image}
-          fill={true}
-          alt="background"
-          priority={true}
-          className={'-z-10'}
-        />
-      </div>
-    </MantineProvider>
+      </MantineProvider>
+    </Providers>
   );
 }

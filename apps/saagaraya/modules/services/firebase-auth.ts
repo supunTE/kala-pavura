@@ -1,18 +1,75 @@
+import { Logger } from '@kala-pavura/services';
 import { getAuth, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
+import firebase from 'firebase/compat';
 
-import { Logger } from '@/modules/services/logger';
+import { db, firebaseApp } from '../../firebase.config';
+import Unsubscribe = firebase.Unsubscribe;
+import { DEFAULT_USER_IMG_URL } from '@kala-pavura/constants';
+import { UserFirestoreService } from '@kala-pavura/db';
+import {
+  KalaPavuraExtendedUser,
+  KalaPavuraUser,
+  UserLoginState,
+} from '@kala-pavura/models';
 
 const provider = new GoogleAuthProvider();
-const auth = getAuth();
+const auth = getAuth(firebaseApp);
 
-const logger = new Logger('Firebase Auth');
+const userFirestoreService = new UserFirestoreService(db);
 
-signInWithPopup(auth, provider)
-  .then((result) => {
-    const credential = GoogleAuthProvider.credentialFromResult(result);
+const logger = new Logger('Firebase Auth Context');
+export const googleLoginWithPopup = async (
+  setUser: (user: KalaPavuraExtendedUser) => void,
+) => {
+  try {
+    const result = await signInWithPopup(auth, provider);
 
-    if (!credential) return;
-  })
-  .catch((error) => {
-    logger.error(error);
+    /// Add or update user in firestore
+    const user = result.user;
+    const { uid, displayName, email, photoURL, phoneNumber } = user;
+    const username = displayName!.replace(' ', '_').toLowerCase() || 'user';
+    const profilePicture = photoURL || DEFAULT_USER_IMG_URL;
+    const userObj: KalaPavuraUser = {
+      uid,
+      username,
+      email,
+      phoneNumber,
+      profilePicture,
+    };
+    const kalaPavuraUser = await userFirestoreService.addOrUpdateUser(
+      uid,
+      userObj,
+    );
+    setUser(kalaPavuraUser);
+    /// ===
+  } catch (error) {
+    logger.error('Error while logging in with Google', error);
+  }
+};
+
+export const accountLogout = async () => {
+  try {
+    await auth.signOut();
+  } catch (error) {
+    logger.error('Error while logging out', error);
+  }
+};
+
+type AuthStateChangeListenerProps = {
+  updateLoginState: (userLoginState: UserLoginState) => void;
+  setUser: (user: KalaPavuraExtendedUser | null) => void;
+};
+export const authStateChangeListener = ({
+  updateLoginState,
+  setUser,
+}: AuthStateChangeListenerProps): Unsubscribe => {
+  const existingUserId: string | null = null;
+  return auth.onAuthStateChanged(async (user) => {
+    if (user) {
+      updateLoginState(UserLoginState.LoggedIn);
+
+      if (existingUserId && existingUserId === user.uid) return;
+      setUser(await userFirestoreService.getUser(user.uid));
+    } else updateLoginState(UserLoginState.LoggedOut);
   });
+};

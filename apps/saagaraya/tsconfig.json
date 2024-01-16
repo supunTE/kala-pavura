@@ -1,12 +1,6 @@
 {
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
-    "baseUrl": ".",
-    "paths": {
-      "@/assets/*": ["assets/*"],
-      "@/components/*": ["components/*"],
-      "@/modules/*": ["modules/*"]
-    },
     "jsx": "preserve",
     "allowJs": true,
     "esModuleInterop": true,
@@ -22,7 +16,7 @@
         "name": "next"
       }
     ],
-    "types": ["jest", "node"]
+    "types": ["jest", "node", "./types.d.ts"]
   },
   "include": [
     "**/*.ts",

@@ -15,6 +15,15 @@ const nextConfig = {
   // fastRefresh: true,
   // concurrentFeatures: true,
   swcMinify: true,
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'lh3.googleusercontent.com',
+        port: '',
+      },
+    ],
+  },
 };
 
 const plugins = [
