@@ -1,7 +1,7 @@
 import cs from 'classnames';
 import Image from 'next/image';
 
-import logo from '../../assets/images/logo.png';
+import { saagaraya_logo } from '@/assets/images';
 
 import { NavbarControls } from './molecules';
 
@@ -21,7 +21,7 @@ export function Navbar() {
           'h-16',
         )}>
         <Image
-          src={logo}
+          src={saagaraya_logo}
           alt="logo"
           className={cs('h-full w-min', 'object-contain')}
         />

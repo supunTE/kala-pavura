@@ -1,15 +1,16 @@
 'use client';
 
 import { MutableRefObject } from 'react';
-import { UserLoginState } from '@kala-pavura/models';
 import { Button, Input, Loader } from '@mantine/core';
 import { CaretRight, MagnifyingGlass, SignOut } from '@phosphor-icons/react';
 import cs from 'classnames';
 import Image from 'next/image';
 
-import { AuthModalComponent } from '@/components/AuthModal.component';
-import { useAuth } from '@/modules/context/AuthContext';
-import { useMouseClickOpen } from '@/modules/hooks/useMouseClick';
+import { UserLoginState } from '@kala-pavura/models';
+
+import { AuthModalComponent } from '@/components/auth-modal';
+import { useAuth } from '@/modules/context';
+import { useMouseClickOpen } from '@/modules/hooks';
 
 export function NavbarControls() {
   const {

@@ -38,11 +38,14 @@
               // Packages
               ["^react", "^@", "^\\w"],
 
-              // Side effect imports.
-              ["^\\u0000"],
+              // Kala-Pavura modules
+              ["^@kala-pavura"],
 
               // Next absolute imports.
               ["^@/"],
+
+              // Side effect imports.
+              ["^\\u0000"],
 
               // parent imports. (`../../file`),
               // sibling imports (`..` or `../`)

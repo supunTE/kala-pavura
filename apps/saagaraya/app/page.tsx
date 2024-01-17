@@ -1,21 +1,21 @@
-import { DisplayLanguage } from '@kala-pavura/models';
 import { createTheme, MantineProvider } from '@mantine/core';
 import cs from 'classnames';
 import Image from 'next/image';
 
-import { notoSansSinhala } from '@/assets/fonts';
+import { DisplayLanguage } from '@kala-pavura/models';
+
+import { noto_sans_sinhala } from '@/assets/fonts';
+import { saagaraya_title_logo } from '@/assets/images';
 import bg_image from '@/assets/images/background.jpg';
-import saagaraya_wave_image from '@/assets/images/saagaraya-logo.png';
-import { useFontStatic } from '@/modules/hooks/useFontStatic';
+import { Navbar } from '@/components/navbar';
+import { useFontStatic } from '@/modules/hooks';
 
-import { Navbar } from '../components';
-
-import { Providers } from './Providers';
+import { Providers } from './providers';
 
 import '@mantine/core/styles.css';
 
 const theme = createTheme({
-  fontFamily: notoSansSinhala.style.fontFamily,
+  fontFamily: noto_sans_sinhala.style.fontFamily,
 });
 
 export default async function Index() {
@@ -29,7 +29,7 @@ export default async function Index() {
           <div
             className={cs('w-full h-full', 'flex justify-center items-center')}>
             <Image
-              src={saagaraya_wave_image}
+              src={saagaraya_title_logo}
               width={500}
               height={300}
               alt="background"

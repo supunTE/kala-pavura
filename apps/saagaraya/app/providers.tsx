@@ -1,6 +1,6 @@
 'use client';
 
-import { AuthContextProvider } from '@/modules/context/AuthContext';
+import { AuthContextProvider } from '@/modules/context';
 
 type ProvidersProps = {
   children: React.ReactElement;

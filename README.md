@@ -46,16 +46,54 @@ Have a look at the [Nx Console extensions](https://nx.dev/nx-console). It provid
 
 Just run `nx build demoapp` to build the application. The build artifacts will be stored in the `dist/` directory, ready to be deployed.
 
-## Set up CI!
+# Guide
 
-Nx comes with local caching already built-in (check your `nx.json`). On CI you might want to go a step further.
+## Naming conventions
+**Files**
+- folders: `kebab-case`
+- React component files: `PascalCase.component`
+- React hooks files: `usePascalCase`
+- React context files: `PascalCase.context`
+- assets/lib/other files: `kebab-case`
 
-- [Set up remote caching](https://nx.dev/core-features/share-your-cache)
-- [Set up task distribution across multiple machines](https://nx.dev/nx-cloud/features/distribute-task-execution)
-- [Learn more how to setup CI](https://nx.dev/recipes/ci)
+**Next files**
+- pages: `page.tsx`
 
-## Connect with us!
+**Variables**
+- general: `camelCase`
+- image/font variables: `snake_case`
+- project constants: `SCREAMING_SNAKE_CASE`
 
-- [Join the community](https://nx.dev/community)
-- [Subscribe to the Nx Youtube Channel](https://www.youtube.com/@nxdevtools)
-- [Follow us on Twitter](https://twitter.com/nxdevtools)
+**Types**
+- interfaces/types/enums: `PascalCase`
+- props: `+Props` (for component props types)
+- params: `+Params` (for function params types)
+
+**Components**
+- component names: `PascalCase`
+
+**Routes**
+- page/api routes: `kebab-case`
+
+## File structure
+- apps
+  - Saagaraya (NextJS)
+    - app
+    - assets
+      - fonts
+      - images
+    - components
+    - modules
+      - context
+      - hooks
+      - services
+- libs
+  - constants
+    - storage
+  - db
+    - user
+  - models
+    - frontend (fonts,ui...)
+    - workspace (user)
+  - services
+    - common

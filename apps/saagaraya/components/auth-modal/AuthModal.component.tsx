@@ -1,13 +1,13 @@
 import { forwardRef } from 'react';
-import { DisplayLanguage } from '@kala-pavura/models';
 import { Button, TextInput } from '@mantine/core';
 import { CaretRight } from '@phosphor-icons/react';
 import cs from 'classnames';
 import Image from 'next/image';
 
-import googleLogo from '@/assets/images/social/google.svg';
-import surferVector from '@/assets/images/vectors/surfer.svg';
-import { useAuth } from '@/modules/context/AuthContext';
+import { DisplayLanguage } from '@kala-pavura/models';
+
+import { google_icon, surfer_vector } from '@/assets/images';
+import { useAuth } from '@/modules/context';
 import { useFont } from '@/modules/hooks';
 
 type AuthModalComponentProps = {
@@ -19,7 +19,7 @@ export const AuthModalComponent = forwardRef<
   HTMLDivElement,
   AuthModalComponentProps
 >(({ isOpen, forceClose }, ref) => {
-  const { primaryFont: PrimaryEnglishFont } = useFont(DisplayLanguage.English);
+  const { primaryFont: primaryEnglishFont } = useFont(DisplayLanguage.English);
 
   const { googleLogin } = useAuth();
 
@@ -41,7 +41,7 @@ export const AuthModalComponent = forwardRef<
         'bg-zinc-500/40 backdrop-blur-md',
         'border border-zinc-400/20',
       )}>
-      <Image src={surferVector} alt="surfer vector" width={250} />
+      <Image src={surfer_vector} alt="surfer vector" width={250} />
 
       <TextInput
         variant="filled"
@@ -74,13 +74,13 @@ export const AuthModalComponent = forwardRef<
         <div className={cs('border-t border-gray-400', 'w-full h-1')} />
       </div>
       <Button
-        leftSection={<Image src={googleLogo} alt="google logo" width={20} />}
+        leftSection={<Image src={google_icon} alt="google logo" width={20} />}
         variant="white"
         color="gray"
         size="xs"
         radius="xl"
         onClick={googleLoginHandler}>
-        <span className={cs(PrimaryEnglishFont.className)}>Google</span>
+        <span className={cs(primaryEnglishFont.className)}>Google</span>
         &nbsp;ගිණුමකින් එක්වන්න
       </Button>
     </div>
