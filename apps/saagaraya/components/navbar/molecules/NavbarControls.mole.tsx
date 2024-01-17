@@ -58,6 +58,7 @@ export function NavbarControls() {
 
 type LoggingButtonProps = {
   isLoginClicked: boolean;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   loggingButton: MutableRefObject<any>;
 };
 function LoggingButton({ isLoginClicked, loggingButton }: LoggingButtonProps) {

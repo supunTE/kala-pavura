@@ -1,4 +1,3 @@
-import { KalaPavuraExtendedUser, KalaPavuraUser } from '@kala-pavura/models';
 import {
   collection,
   doc,
@@ -7,6 +6,8 @@ import {
   setDoc,
   updateDoc,
 } from 'firebase/firestore';
+
+import { KalaPavuraExtendedUser, KalaPavuraUser } from '@kala-pavura/models';
 
 import 'firebase/firestore';
 

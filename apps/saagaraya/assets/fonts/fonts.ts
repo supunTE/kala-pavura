@@ -1,10 +1,11 @@
-import { DisplayLanguage, LanguageFonts } from '@kala-pavura/models';
 import {
   Noto_Sans_Sinhala,
   Noto_Serif_Sinhala,
   Poppins,
   Source_Serif_4,
 } from 'next/font/google';
+
+import { DisplayLanguage, LanguageFonts } from '@kala-pavura/models';
 
 export const noto_serif_sinhala = Noto_Serif_Sinhala({
   subsets: ['sinhala'],

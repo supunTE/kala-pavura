@@ -49,7 +49,9 @@ Just run `nx build demoapp` to build the application. The build artifacts will b
 # Guide
 
 ## Naming conventions
+
 **Files**
+
 - folders: `kebab-case`
 - React component files: `PascalCase.component`
 - React hooks files: `usePascalCase`
@@ -57,25 +59,31 @@ Just run `nx build demoapp` to build the application. The build artifacts will b
 - assets/lib/other files: `kebab-case`
 
 **Next files**
+
 - pages: `page.tsx`
 
 **Variables**
+
 - general: `camelCase`
 - image/font variables: `snake_case`
 - project constants: `SCREAMING_SNAKE_CASE`
 
 **Types**
+
 - interfaces/types/enums: `PascalCase`
 - props: `+Props` (for component props types)
 - params: `+Params` (for function params types)
 
 **Components**
+
 - component names: `PascalCase`
 
 **Routes**
+
 - page/api routes: `kebab-case`
 
 ## File structure
+
 - apps
   - Saagaraya (NextJS)
     - app

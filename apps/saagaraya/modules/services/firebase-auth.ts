@@ -1,6 +1,7 @@
-import { Logger } from '@kala-pavura/services';
 import { getAuth, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import firebase from 'firebase/compat';
+
+import { Logger } from '@kala-pavura/services';
 
 import { db, firebaseApp } from '../../firebase.config';
 import Unsubscribe = firebase.Unsubscribe;

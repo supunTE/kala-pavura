@@ -1,6 +1,7 @@
-import { DisplayLanguage } from '@kala-pavura/models';
 import { create } from 'zustand';
 import { devtools } from 'zustand/middleware';
+
+import { DisplayLanguage } from '@kala-pavura/models';
 export interface UIStore {
   displayLanguage: DisplayLanguage;
 }

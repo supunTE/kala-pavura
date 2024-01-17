@@ -6,7 +6,8 @@
     "preinstall": "npx only-allow pnpm",
     "format:fix": "prettier --write .",
     "lint": "nx run-many --target=lint --all",
-    "lint:fix": "nx run-many --target=lint --all -- --fix"
+    "lint:fix": "nx run-many --target=lint --all -- --fix",
+    "fix:all": "npm run lint:fix && npm run format:fix"
   },
   "private": true,
   "dependencies": {

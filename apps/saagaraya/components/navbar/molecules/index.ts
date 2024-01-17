@@ -1,1 +1,1 @@
-export * from './NavbarControls.mole'
+export * from './NavbarControls.mole';
