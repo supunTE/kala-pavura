@@ -4,6 +4,7 @@ const { join } = require('path');
 const { createGlobPatternsForDependencies } = require('@nrwl/next/tailwind');
 
 module.exports = {
+  darkMode: ['class'],
   presets: [require('../../tailwind-workspace-preset.js')],
   content: [
     join(__dirname, 'app/**/*.{js,ts,jsx,tsx}'),

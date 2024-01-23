@@ -6,7 +6,7 @@ import { Logger } from '@kala-pavura/services';
 import { db, firebaseApp } from '../../firebase.config';
 import Unsubscribe = firebase.Unsubscribe;
 import { DEFAULT_USER_IMG_URL } from '@kala-pavura/constants';
-import { UserFirestoreService } from '@kala-pavura/db';
+import { UserFirestoreDao } from '@kala-pavura/db';
 import {
   KalaPavuraExtendedUser,
   KalaPavuraUser,
@@ -16,7 +16,7 @@ import {
 const provider = new GoogleAuthProvider();
 const auth = getAuth(firebaseApp);
 
-const userFirestoreService = new UserFirestoreService(db);
+const userFirestoreService = new UserFirestoreDao(db);
 
 const logger = new Logger('Firebase Auth Context');
 export const googleLoginWithPopup = async (

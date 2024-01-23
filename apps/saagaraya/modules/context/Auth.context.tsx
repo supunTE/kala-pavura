@@ -2,7 +2,7 @@
 
 import {
   createContext,
-  ReactElement,
+  ReactNode,
   useContext,
   useEffect,
   useState,
@@ -33,7 +33,7 @@ const AuthContext = createContext<AuthContextType>({
 const logger = new Logger('AuthContext');
 
 type AuthContextProviderProps = {
-  children: ReactElement;
+  children: ReactNode;
 };
 export const AuthContextProvider = ({ children }: AuthContextProviderProps) => {
   const [kalaPavuraUser, setKalaPavuraUser] =

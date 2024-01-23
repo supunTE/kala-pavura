@@ -76,7 +76,7 @@ export const AuthModalComponent = forwardRef<
       <Button
         leftSection={<Image src={google_icon} alt="google logo" width={20} />}
         variant="white"
-        color="gray"
+        color="black"
         size="xs"
         radius="xl"
         onClick={googleLoginHandler}>

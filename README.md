@@ -54,6 +54,7 @@ Just run `nx build demoapp` to build the application. The build artifacts will b
 
 - folders: `kebab-case`
 - React component files: `PascalCase.component`
+  - component molecules: `PascalCase.mole`
 - React hooks files: `usePascalCase`
 - React context files: `PascalCase.context`
 - assets/lib/other files: `kebab-case`
@@ -65,6 +66,7 @@ Just run `nx build demoapp` to build the application. The build artifacts will b
 **Variables**
 
 - general: `camelCase`
+- default props: `+Defaults`
 - image/font variables: `snake_case`
 - project constants: `SCREAMING_SNAKE_CASE`
 
@@ -76,7 +78,7 @@ Just run `nx build demoapp` to build the application. The build artifacts will b
 
 **Components**
 
-- component names: `PascalCase`
+- component names: `PascalCaseComponent`
 
 **Routes**
 

@@ -11,7 +11,7 @@ import { KalaPavuraExtendedUser, KalaPavuraUser } from '@kala-pavura/models';
 
 import 'firebase/firestore';
 
-export class UserFirestoreService {
+export class UserFirestoreDao {
   constructor(private db: Firestore) {}
 
   async getUser(uid: string) {

@@ -17,9 +17,16 @@ const nextConfig = {
   swcMinify: true,
   images: {
     remotePatterns: [
+      // firebase storage
       {
         protocol: 'https',
         hostname: 'lh3.googleusercontent.com',
+        port: '',
+      },
+      // unsplash
+      {
+        protocol: 'https',
+        hostname: 'images.unsplash.com',
         port: '',
       },
     ],
