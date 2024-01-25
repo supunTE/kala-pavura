@@ -1,1 +1,1 @@
-export * from './get-common-color-by-image';
+export * from './extract-image-colors';
