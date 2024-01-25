@@ -12,13 +12,6 @@ export const ThemeSwitchComponent = () => {
   const syncMantineColorScheme = useCallback(
     (theme?: string) => {
       if (!theme) return;
-      // if (theme === 'system') {
-      //   setColorScheme('auto');
-      // } else if (theme === 'dark') {
-      //   setColorScheme('dark');
-      // } else if (theme === 'light') {
-      //   setColorScheme('light');
-      // }
     },
     [setColorScheme],
   );
