@@ -14,7 +14,6 @@ const nextConfig = {
   },
   // fastRefresh: true,
   // concurrentFeatures: true,
-  distDir: 'dist/apps/saagaraya',
   swcMinify: true,
   images: {
     remotePatterns: [
