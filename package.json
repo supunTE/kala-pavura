@@ -3,13 +3,17 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "preinstall": "npx only-allow pnpm",
+    "preinstall": "node tools/scripts/preinstall-script.js",
     "format:fix": "prettier --write .",
     "lint": "nx run-many --target=lint --all",
     "lint:fix": "nx run-many --target=lint --all -- --fix",
     "fix:all": "npm run lint:fix && npm run format:fix"
   },
   "private": true,
+  "engines" : {
+    "yarn": ">=1.22.0",
+    "node" : ">=18.16.0 <19.0.0"
+  },
   "dependencies": {
     "@mantine/core": "^7.4.0",
     "@mantine/hooks": "^7.4.1",
