@@ -1,20 +1,5 @@
-import { ReactNode } from 'react';
 import { Icon } from '@phosphor-icons/react';
 import { Editor } from '@tiptap/react';
-
-export type ToolBarCoreButtonProps = {
-  icon: Icon;
-  onClick?: () => void;
-  isSelected?: boolean;
-  className?: string;
-};
-export type ColorPickerButtonProps = {
-  onPick?: (value: string) => void;
-};
-
-export type ToolBarCoreButtonGroupProps = {
-  children: ReactNode | ReactNode[];
-};
 
 type ButtonActionName = string | undefined;
 type ButtonActionAttributes<T extends object> = T | undefined;
@@ -34,6 +19,7 @@ export type AlignButtonAction = ButtonAction<
   undefined,
   { textAlign: 'left' | 'center' | 'right' | 'justify' }
 >;
+
 type HeadingButtonActionHeadingType = ButtonAction<
   'heading',
   {

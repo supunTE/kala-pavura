@@ -1,8 +1,10 @@
 import {
+  Gemunu_Libre,
   Noto_Sans_Sinhala,
   Noto_Serif_Sinhala,
   Poppins,
   Source_Serif_4,
+  Yaldevi,
 } from 'next/font/google';
 
 import { DisplayLanguage, LanguageFonts } from '@kala-pavura/models';
@@ -17,6 +19,18 @@ export const noto_sans_sinhala = Noto_Sans_Sinhala({
   subsets: ['sinhala'],
   display: 'swap',
   weight: ['400', '600'],
+});
+
+export const yaldevi = Yaldevi({
+  subsets: ['sinhala'],
+  display: 'swap',
+  weight: ['400', '700'],
+});
+
+export const gemunu_libre = Gemunu_Libre({
+  subsets: ['sinhala'],
+  display: 'swap',
+  weight: ['400', '700'],
 });
 
 export const poppins = Poppins({

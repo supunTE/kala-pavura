@@ -1,1 +1,2 @@
-export * from './toolbar';
+export * from './toolbar-action';
+export * from './editor-fonts';

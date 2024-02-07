@@ -1,6 +1,6 @@
 import { DisplayLanguage } from './ui';
 
-type NextFont = {
+export type NextFont = {
   className: string;
   style: {
     fontFamily: string;
