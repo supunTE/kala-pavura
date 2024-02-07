@@ -1,10 +1,5 @@
 import { getAuth, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
-import firebase from 'firebase/compat';
 
-import { Logger } from '@kala-pavura/services';
-
-import { db, firebaseApp } from '../../firebase.config';
-import Unsubscribe = firebase.Unsubscribe;
 import { DEFAULT_USER_IMG_URL } from '@kala-pavura/constants';
 import { UserFirestoreDao } from '@kala-pavura/db';
 import {
@@ -12,6 +7,9 @@ import {
   KalaPavuraUser,
   UserLoginState,
 } from '@kala-pavura/models';
+import { Logger } from '@kala-pavura/services';
+
+import { db, firebaseApp } from '../../firebase.config';
 
 const provider = new GoogleAuthProvider();
 const auth = getAuth(firebaseApp);
@@ -63,7 +61,7 @@ type AuthStateChangeListenerProps = {
 export const authStateChangeListener = ({
   updateLoginState,
   setUser,
-}: AuthStateChangeListenerProps): Unsubscribe => {
+}: AuthStateChangeListenerProps) => {
   const existingUserId: string | null = null;
   return auth.onAuthStateChanged(async (user) => {
     if (user) {
