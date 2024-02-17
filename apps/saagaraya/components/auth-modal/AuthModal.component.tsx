@@ -32,13 +32,13 @@ export const AuthModalComponent = forwardRef<
     <div
       ref={ref}
       className={cs(
-        'absolute top-[3.5em] right-4',
+        'absolute right-4 top-14',
         {
           hidden: !isOpen,
         },
-        'w-96 p-6 rounded-md',
+        'w-96 rounded-md p-6',
         'flex flex-col items-center justify-center',
-        'bg-zinc-500/40 backdrop-blur-md',
+        'bg-blue-300 dark:bg-zinc-800',
         'border border-zinc-400/20',
       )}>
       <Image src={surfer_vector} alt="surfer vector" width={250} />
@@ -68,10 +68,12 @@ export const AuthModalComponent = forwardRef<
         rightSection={<CaretRight size={16} weight="light" />}>
         එක්වන්න
       </Button>
-      <div className={cs('flex items-center', 'w-full my-8')}>
-        <div className={cs('border-t border-gray-400', 'w-full h-1')} />
-        <div className={cs('text-gray-400 px-4', 'text-sm')}>හෝ</div>
-        <div className={cs('border-t border-gray-400', 'w-full h-1')} />
+      <div className={cs('flex items-center', 'my-8 w-full')}>
+        <div className={cs('border-t border-gray-400', 'h-1 w-full')} />
+        <div className={cs('px-4 text-xs text-gray-600 dark:text-gray-100')}>
+          හෝ
+        </div>
+        <div className={cs('border-t border-gray-400', 'h-1 w-full')} />
       </div>
       <Button
         leftSection={<Image src={google_icon} alt="google logo" width={20} />}

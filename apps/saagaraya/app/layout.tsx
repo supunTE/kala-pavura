@@ -1,5 +1,8 @@
 import { ReactNode } from 'react';
 
+import { BackgroundComponent } from '@/components/background';
+import { Navbar } from '@/components/navbar';
+
 import { Providers } from './providers';
 
 import './global.css';
@@ -13,8 +16,14 @@ export const metadata = {
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
-      <body>
-        <Providers>{children}</Providers>
+      <body className="relative h-screen overflow-hidden">
+        <BackgroundComponent moreDarken={true} />
+        <Providers>
+          <div className="z-0 h-full overflow-y-auto">
+            <Navbar />
+            {children}
+          </div>
+        </Providers>
       </body>
     </html>
   );

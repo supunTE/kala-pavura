@@ -5,16 +5,15 @@ import { DisplayLanguage } from '@kala-pavura/models';
 
 import { saagaraya_title_logo } from '@/assets/images';
 import { BackgroundComponent } from '@/components/background';
-import { Navbar } from '@/components/navbar';
 import { useFontStatic } from '@/modules/hooks';
 
 export default async function Index() {
   const { primaryFont } = useFontStatic(DisplayLanguage.Sinhala);
 
   return (
-    <div className={cs(primaryFont.className, 'h-full')}>
-      <Navbar />
-      <div className={cs('w-full h-full', 'flex justify-center items-center')}>
+    <div className={cs(primaryFont.className)}>
+      <div
+        className={cs('h-screen w-full', 'flex items-center justify-center')}>
         <Image
           src={saagaraya_title_logo}
           width={500}

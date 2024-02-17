@@ -15,9 +15,9 @@ export function BackgroundComponent({
   moreDarken = false,
 }: BackgroundComponentProps = backgroundComponentDefaults) {
   return (
-    <>
+    <div className="absolute inset-0 -z-20 h-full w-full">
       <div
-        className={cs('z-[-5] absolute', 'h-full w-full inset-0', {
+        className={cs('absolute inset-0 ', {
           'bg-zinc-900/60': !moreDarken,
           'bg-zinc-900/80 backdrop-blur-sm': moreDarken,
         })}
@@ -27,8 +27,9 @@ export function BackgroundComponent({
         fill={true}
         alt="background"
         priority={true}
-        className={'-z-10'}
+        objectFit="cover"
+        className="-z-20"
       />
-    </>
+    </div>
   );
 }

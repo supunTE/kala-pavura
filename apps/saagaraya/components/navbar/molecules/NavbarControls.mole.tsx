@@ -23,23 +23,26 @@ export function NavbarControls() {
   const { user } = useAuth();
 
   return (
-    <div className={cs('flex gap-4 z-20')}>
+    <div className="z-10 flex items-center justify-center gap-4">
       <Input
         size="xs"
+        fz="lg"
         radius="xl"
         placeholder="කිමිදෙන්න"
-        className={cs('w-80')}
+        className={cs('h-full w-80')}
         leftSection={<MagnifyingGlass size={14} weight="light" />}
       />
 
       {user && (
-        <Image
-          src={user.profilePicture}
-          alt="google logo"
-          width={32}
-          height={32}
-          className={cs('rounded-full')}
-        />
+        <div className="h-full">
+          <Image
+            src={user.profilePicture}
+            alt="google logo"
+            width={32}
+            height={32}
+            className="rounded-full object-cover"
+          />
+        </div>
       )}
 
       <LoggingButton
@@ -72,7 +75,7 @@ function LoggingButton({ isLoginClicked, loggingButton }: LoggingButtonProps) {
           color="#2da1e4"
           size="xs"
           radius="xl"
-          leftSection={<Loader size={20} />}>
+          leftSection={<Loader size={20} color="white" />}>
           පූරණය වෙමින්...
         </Button>
       );

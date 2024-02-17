@@ -67,7 +67,7 @@ Just run `nx build demoapp` to build the application. The build artifacts will b
 
 - general: `camelCase`
 - default props: `+Defaults`
-- image/font variables: `snake_case`
+- image/font/dummy_data (resources) variables: `snake_case`
 - project constants: `SCREAMING_SNAKE_CASE`
 
 **Types**

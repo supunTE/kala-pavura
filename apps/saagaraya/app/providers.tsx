@@ -1,11 +1,15 @@
 'use client';
 
 import { ReactNode } from 'react';
-import { ColorSchemeScript, createTheme, MantineProvider } from '@mantine/core';
+import {
+  ColorSchemeScript,
+  createTheme,
+  MantineProvider,
+  rem,
+} from '@mantine/core';
 import { ThemeProvider } from 'next-themes';
 
 import { noto_sans_sinhala } from '@/assets/fonts';
-import { ThemeSwitchComponent } from '@/components/theme-switch';
 import { AuthContextProvider } from '@/modules/context';
 
 type ProvidersProps = {
@@ -14,6 +18,13 @@ type ProvidersProps = {
 
 const theme = createTheme({
   fontFamily: noto_sans_sinhala.style.fontFamily,
+  fontSizes: {
+    xs: rem(2),
+    sm: rem(1),
+    md: rem(1),
+    lg: rem(1),
+    xl: rem(2),
+  },
 });
 
 export function Providers({ children }: ProvidersProps) {
@@ -22,7 +33,6 @@ export function Providers({ children }: ProvidersProps) {
       <ThemeProvider attribute="class">
         <MantineProvider theme={theme}>
           <ColorSchemeScript defaultColorScheme="auto" />
-          <ThemeSwitchComponent />
           {children}
         </MantineProvider>
       </ThemeProvider>
