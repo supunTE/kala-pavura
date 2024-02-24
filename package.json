@@ -86,6 +86,7 @@
     "prettier": "^3.2.5",
     "prettier-plugin-tailwindcss": "^0.5.11",
     "sass": "1.70.0",
+    "sinhala-unicode-coverter": "^1.0.2",
     "ts-jest": "^29.1.0",
     "ts-node": "10.9.2",
     "typescript": "5.3.3",

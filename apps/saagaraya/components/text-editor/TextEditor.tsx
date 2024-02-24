@@ -1,6 +1,6 @@
 'use client';
 
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { Color } from '@tiptap/extension-color';
 import { FontFamily } from '@tiptap/extension-font-family';
 import { Heading } from '@tiptap/extension-heading';
@@ -11,12 +11,17 @@ import { EditorContent, mergeAttributes, useEditor } from '@tiptap/react';
 import { StarterKit } from '@tiptap/starter-kit';
 import cs from 'classnames';
 
-import { ToolbarCoreButtonGroup } from '@/components/atoms';
+import { ToolbarCoreButtonGroup, TransliteratorBox } from '@/components/atoms';
 import { Select, SelectOption } from '@/components/select';
+import { TransliterateText } from '@/modules/utils';
 
 import { TextEditorControls } from './elements';
 import { EditorFontKeys, editorFonts, editorFontsArray } from './models';
-import { ColorPickerButton, ToolBarButtonGroup } from './molecules';
+import {
+  ToolBarButtonGroup,
+  ToolBarColorPickerButton,
+  ToolBarIconButton,
+} from './molecules';
 
 const textEditorOptions = {
   extensions: [
@@ -66,12 +71,93 @@ const textEditorOptions = {
   },
 };
 
+const defaultMenuPosition = {
+  top: 0,
+  left: 0,
+  display: 'none',
+};
+
 export const TextEditor = () => {
   const [selectedFontKey, setSelectedFontKey] = useState(
     EditorFontKeys.NotoSansSinhala,
   );
-
+  const [menuPosition, setMenuPosition] = useState(defaultMenuPosition);
+  const trnasliterateTextKey = 'text-editor';
+  const [enableTransliteration, setEnableTransliteration] = useState(false);
   const editor = useEditor(textEditorOptions);
+
+  const handleBeforeInput = (e: any) => {
+    if (!editor || !enableTransliteration) return;
+    e.preventDefault();
+
+    switch (e.data) {
+      case ' ': {
+        const transliteratedText =
+          TransliterateText.removeAndGetTransliteratedText(
+            trnasliterateTextKey,
+          );
+        if (!editor) return;
+        const transaction = editor.state.tr.insertText(
+          transliteratedText ? transliteratedText + ' ' : ' ',
+        );
+        editor.view.dispatch(transaction);
+        setMenuPosition(defaultMenuPosition);
+        break;
+      }
+      default: {
+        e.preventDefault();
+        TransliterateText.storeTransliteratedText(trnasliterateTextKey, e.data);
+
+        const pos = editor.view.coordsAtPos(editor.state.selection.head);
+        setMenuPosition({
+          top: pos.top + window.scrollY,
+          left: pos.left + window.scrollX,
+          display: 'block',
+        });
+        break;
+      }
+    }
+  };
+
+  const handleKeyDown = (e: any) => {
+    if (!enableTransliteration) return;
+
+    switch (e.key) {
+      case 'Backspace': {
+        const isThereTextToTransliterate =
+          TransliterateText.isThereTextToTransliterate(trnasliterateTextKey);
+        if (!isThereTextToTransliterate) return;
+        e.preventDefault();
+        TransliterateText.backspaceTransliteratedText(trnasliterateTextKey);
+        break;
+      }
+      case 'Enter': {
+        const transliteratedText =
+          TransliterateText.removeAndGetTransliteratedText(
+            trnasliterateTextKey,
+          );
+        if (!editor) return;
+        const transaction = editor.state.tr.insertText(
+          transliteratedText ? transliteratedText : '',
+        );
+        editor.view.dispatch(transaction);
+        setMenuPosition(defaultMenuPosition);
+      }
+      case 'Escape': {
+        setMenuPosition(defaultMenuPosition);
+        TransliterateText.removeAndGetTransliteratedText(trnasliterateTextKey);
+        break;
+      }
+      default: {
+        break;
+      }
+    }
+  };
+
+  useEffect(() => {
+    setMenuPosition(defaultMenuPosition);
+    TransliterateText.removeAndGetTransliteratedText(trnasliterateTextKey);
+  }, [enableTransliteration]);
 
   const editorControls = useMemo(() => {
     if (!editor) return null;
@@ -81,11 +167,11 @@ export const TextEditor = () => {
   if (!editor) return null;
 
   return (
-    <div className={cs('flex flex-col h-screen')}>
+    <div className={cs('flex h-screen flex-col')}>
       <div
         className={cs(
-          'flex items-center gap-2 p-2 m-6',
-          'bg-gray-400/20 rounded-full',
+          'm-6 flex flex-wrap items-center gap-2 p-2',
+          'rounded-2xl bg-gray-400/20 min-[1000px]:rounded-full',
           'z-10',
         )}>
         <ToolBarButtonGroup
@@ -93,7 +179,7 @@ export const TextEditor = () => {
           editor={editor}
         />
         <ToolbarCoreButtonGroup>
-          <ColorPickerButton
+          <ToolBarColorPickerButton
             onPick={(value) => {
               editor?.chain().focus().setColor(value).run();
             }}
@@ -126,13 +212,29 @@ export const TextEditor = () => {
             editor.chain().focus().setFontFamily(fontFamily).run();
           }}
           selected={selectedFontKey}
-          className="max-w-40"
+          className="max-w-60"
         />
+        <ToolbarCoreButtonGroup>
+          <ToolBarIconButton
+            iconText="SIN ➡️ සිං"
+            onClick={() => {
+              setEnableTransliteration((prev) => !prev);
+            }}
+            isActive={enableTransliteration}
+          />
+        </ToolbarCoreButtonGroup>
       </div>
+      {editor && (
+        <div style={{ position: 'absolute', ...menuPosition }}>
+          <TransliteratorBox id={trnasliterateTextKey} />
+        </div>
+      )}
       <EditorContent
         editor={editor}
+        onBeforeInput={handleBeforeInput}
+        onKeyDown={handleKeyDown}
         className={cs(
-          'h-full overflow-none bg-neutral-200 dark:bg-neutral-800',
+          'overflow-none h-full bg-neutral-200 dark:bg-neutral-800',
         )}
       />
     </div>

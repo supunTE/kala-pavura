@@ -1,7 +1,7 @@
 import { ToolbarCoreButtonGroup } from '@/components/atoms';
 
 import { ToolBarButtonGroupProps } from '../models';
-import { ToolBarActionButton } from '../molecules';
+import { ToolBarIconButton } from '../molecules';
 
 export const ToolBarButtonGroup = ({
   toolBarButtons,
@@ -10,7 +10,7 @@ export const ToolBarButtonGroup = ({
   return (
     <ToolbarCoreButtonGroup>
       {toolBarButtons.map((toolBarButton, index) => (
-        <ToolBarActionButton key={index} editor={editor} {...toolBarButton} />
+        <ToolBarIconButton key={index} editor={editor} {...toolBarButton} />
       ))}
     </ToolbarCoreButtonGroup>
   );

@@ -33,7 +33,7 @@ export function Select<T>({
             'py-2 pl-4 pr-10 text-left',
             'border border-gray-300 dark:border-neutral-500',
             'focus:outline-none focus-visible:border-blue-400 focus-visible:ring-[0.0075rem] focus-visible:ring-blue-400',
-            'bg-white dark:bg-neutral-800 sm:text-sm',
+            'bg-white sm:text-sm dark:bg-neutral-800',
           )}>
           {selectedOption && (
             <span
@@ -55,7 +55,7 @@ export function Select<T>({
           leaveTo="opacity-0">
           <Listbox.Options
             className={cs(
-              'absolute mt-3 z-2 max-h-60 w-full overflow-auto rounded-2xl',
+              'z-2 absolute mt-3 max-h-60 w-full overflow-auto rounded-2xl',
               'py-1 text-base',
               'ring-1 ring-black/5 focus:outline-none',
               'bg-white dark:bg-neutral-700',

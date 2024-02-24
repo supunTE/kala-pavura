@@ -3,24 +3,32 @@ import { Palette } from '@phosphor-icons/react';
 
 import { ToolBarCoreButton } from '@/components/atoms';
 
-import { ToolBarActionButtonProps } from '../models';
+import { ToolBarIconButtonProps } from '../models';
 
-export const ToolBarActionButton = ({
+export const ToolBarIconButton = ({
   icon,
+  iconText,
   onClick,
   action,
   editor,
-}: ToolBarActionButtonProps) => {
+  isActive: isIconButtonActive,
+}: ToolBarIconButtonProps) => {
   let isActionActive = false;
-  if (action.name)
-    isActionActive = editor.isActive(action.name, action.attributes);
-  else if (action.attributes)
-    isActionActive = editor.isActive(action.attributes);
+
+  if (isIconButtonActive !== undefined) {
+    isActionActive = isIconButtonActive;
+  } else if (action && editor) {
+    if (action.name)
+      isActionActive = editor.isActive(action.name, action.attributes);
+    else if (action.attributes)
+      isActionActive = editor.isActive(action.attributes);
+  }
 
   return (
     <ToolBarCoreButton
       onClick={onClick}
       icon={icon}
+      iconText={iconText}
       isSelected={isActionActive}
     />
   );
@@ -30,7 +38,9 @@ type ColorPickerButtonProps = {
   onPick?: (value: string) => void;
 };
 
-export const ColorPickerButton = ({ onPick }: ColorPickerButtonProps) => {
+export const ToolBarColorPickerButton = ({
+  onPick,
+}: ColorPickerButtonProps) => {
   return (
     <Group justify="center">
       <HoverCard

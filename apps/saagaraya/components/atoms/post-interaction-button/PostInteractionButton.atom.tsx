@@ -47,7 +47,7 @@ export const PostInteractionButtonAtom = ({
   };
 
   return (
-    <div className="flex gap-2 px-2 py-4 cursor-pointer">
+    <div className="flex cursor-pointer gap-2 px-2 py-4">
       {icons.map((icon, index) => {
         const Icon = icon;
         return (
@@ -57,7 +57,7 @@ export const PostInteractionButtonAtom = ({
               buttonToggleHandlers(index);
             }}
             className={cs(
-              'bg-white/20 rounded-full p-1',
+              'rounded-full bg-white/20 p-1',
               'group hover:bg-white',
               {
                 'bg-white/80': iconState[index],

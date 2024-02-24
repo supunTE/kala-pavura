@@ -47,7 +47,7 @@ export function CardCover({
         <h2
           className={cs(
             'p-4 text-3xl font-bold text-white',
-            'text-center line-clamp-3',
+            'line-clamp-3 text-center',
             'drop-shadow-3xl',
             'transition-all duration-1000 ease-in-out',
             secondaryFont.className,

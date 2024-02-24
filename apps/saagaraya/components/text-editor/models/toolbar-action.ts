@@ -37,12 +37,14 @@ type ButtonActions =
   | HeadingButtonAction;
 
 export type ToolBarAction<T extends ButtonActions> = {
-  icon: Icon;
-  action: T;
+  icon?: Icon;
+  iconText?: string;
+  action?: T;
+  isActive?: boolean;
   onClick: () => void;
 };
-export type ToolBarActionButtonProps = ToolBarAction<ButtonActions> & {
-  editor: Editor;
+export type ToolBarIconButtonProps = ToolBarAction<ButtonActions> & {
+  editor?: Editor;
 };
 
 export type ToolBarActionsGroup = {
