@@ -7,6 +7,7 @@ import { Providers } from './providers';
 
 import './global.css';
 import '@mantine/core/styles.css';
+import '@mantine/notifications/styles.css';
 
 export const metadata = {
   title: 'Saagaraya🌊',
@@ -16,7 +17,7 @@ export const metadata = {
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
-      <body className="relative h-screen overflow-hidden">
+      <body>
         <BackgroundComponent moreDarken={true} />
         <Providers>
           <div className="z-0 h-full overflow-y-auto">

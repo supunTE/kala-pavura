@@ -1,2 +1,2 @@
-export * from './lib/frontend';
-export * from './lib/workspace';
+export * from './lib';
+export * from './utils';

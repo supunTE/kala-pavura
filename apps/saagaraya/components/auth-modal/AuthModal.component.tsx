@@ -1,12 +1,13 @@
 import { forwardRef } from 'react';
-import { Button, TextInput } from '@mantine/core';
-import { CaretRight } from '@phosphor-icons/react';
+import { Button, Tabs } from '@mantine/core';
+import { PencilSimpleLine, SignIn } from '@phosphor-icons/react';
 import cs from 'classnames';
 import Image from 'next/image';
 
 import { DisplayLanguage } from '@kala-pavura/models';
 
 import { google_icon, surfer_vector } from '@/assets/images';
+import { LoginForm, RegisterForm } from '@/components/auth-modal/molecules';
 import { useAuth } from '@/modules/context';
 import { useFont } from '@/modules/hooks';
 
@@ -24,7 +25,8 @@ export const AuthModalComponent = forwardRef<
   const { googleLogin } = useAuth();
 
   const googleLoginHandler = async () => {
-    await googleLogin?.();
+    const result = await googleLogin?.();
+    if (!result) return;
     forceClose();
   };
 
@@ -32,43 +34,44 @@ export const AuthModalComponent = forwardRef<
     <div
       ref={ref}
       className={cs(
+        'text-black dark:text-white',
         'absolute right-4 top-14',
         {
           hidden: !isOpen,
         },
-        'w-96 rounded-md p-6',
+        'w-96 rounded-md p-5',
         'flex flex-col items-center justify-center',
         'bg-blue-300 dark:bg-zinc-800',
         'border border-zinc-400/20',
       )}>
-      <Image src={surfer_vector} alt="surfer vector" width={250} />
+      <Image src={surfer_vector} alt="surfer vector" width={200} />
 
-      <TextInput
-        variant="filled"
-        size="xs"
-        radius="xl"
-        label="ඊ-තැපැල් ලිපිනය"
-        placeholder="user@email.com"
-        className={cs('w-full', 'text-white')}
-      />
-      <TextInput
-        variant="filled"
-        size="xs"
-        radius="xl"
-        label="මුරපදය"
-        placeholder="***"
-        className={cs('w-full', 'mt-4', 'text-white')}
-      />
-      <Button
-        variant="filled"
-        color="#2da1e4"
-        size="xs"
-        radius="xl"
-        className={cs('z-20', 'mt-6')}
-        rightSection={<CaretRight size={16} weight="light" />}>
-        එක්වන්න
-      </Button>
-      <div className={cs('flex items-center', 'my-8 w-full')}>
+      <Tabs radius="md" defaultValue="gallery" className="w-full">
+        <Tabs.List justify="center" className="mx-4 overflow-hidden">
+          <Tabs.Tab
+            value="gallery"
+            className="font-medium"
+            leftSection={<SignIn size={12} />}>
+            පිරීම
+          </Tabs.Tab>
+          <Tabs.Tab
+            value="messages"
+            className="font-medium"
+            leftSection={<PencilSimpleLine size={12} />}>
+            ලියාපදිංචිය
+          </Tabs.Tab>
+        </Tabs.List>
+
+        <Tabs.Panel value="gallery">
+          <LoginForm forceClose={forceClose} />
+        </Tabs.Panel>
+
+        <Tabs.Panel value="messages">
+          <RegisterForm forceClose={forceClose} />
+        </Tabs.Panel>
+      </Tabs>
+
+      <div className={'mb-8 mt-4 flex w-full items-center opacity-70'}>
         <div className={cs('border-t border-gray-400', 'h-1 w-full')} />
         <div className={cs('px-4 text-xs text-gray-600 dark:text-gray-100')}>
           හෝ

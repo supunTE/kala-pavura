@@ -27,8 +27,7 @@ export function BackgroundComponent({
         fill={true}
         alt="background"
         priority={true}
-        objectFit="cover"
-        className="-z-20"
+        className="-z-20 object-cover"
       />
     </div>
   );

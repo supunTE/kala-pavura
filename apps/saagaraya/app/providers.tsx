@@ -2,6 +2,7 @@
 
 import { ReactNode } from 'react';
 import { ColorSchemeScript, createTheme, MantineProvider } from '@mantine/core';
+import { Notifications } from '@mantine/notifications';
 import { ThemeProvider } from 'next-themes';
 
 import { noto_sans_sinhala } from '@/assets/fonts';
@@ -20,10 +21,9 @@ export function Providers({ children }: ProvidersProps) {
     <AuthContextProvider>
       <ThemeProvider attribute="class">
         <MantineProvider theme={theme}>
-          <div className="font-medium">
-            <ColorSchemeScript defaultColorScheme="auto" />
-            {children}
-          </div>
+          <Notifications position="bottom-right" limit={5} />
+          <ColorSchemeScript defaultColorScheme="auto" />
+          {children}
         </MantineProvider>
       </ThemeProvider>
     </AuthContextProvider>

@@ -1,11 +1,11 @@
 export type KalaPavuraUser = {
   uid: string;
   username: string;
-  firstName?: string;
-  lastName?: string;
-  email: string | null;
-  phoneNumber: string | null;
+  email: string;
   profilePicture: string;
+  firstName: string | null;
+  lastName: string | null;
+  phoneNumber: string | null;
 };
 
 export type KalaPavuraExtendedUser = KalaPavuraUser & {

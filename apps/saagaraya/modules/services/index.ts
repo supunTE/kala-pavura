@@ -1,2 +1,3 @@
 export * from './store';
-export * from './firebase-auth';
+export * from './firebase-auth.service';
+export * from './notifications.service';

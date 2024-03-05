@@ -29,6 +29,7 @@ export function NavbarControls() {
         fz="lg"
         radius="xl"
         placeholder="කිමිදෙන්න"
+        autoComplete="off"
         className={cs('h-full w-80')}
         leftSection={<MagnifyingGlass size={14} weight="light" />}
       />

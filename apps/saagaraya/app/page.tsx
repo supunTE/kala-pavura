@@ -4,7 +4,6 @@ import Image from 'next/image';
 import { DisplayLanguage } from '@kala-pavura/models';
 
 import { saagaraya_title_logo } from '@/assets/images';
-import { BackgroundComponent } from '@/components/background';
 import { useFontStatic } from '@/modules/hooks';
 
 export default async function Index() {
@@ -23,7 +22,6 @@ export default async function Index() {
           className={cs('backdrop-filter')}
         />
       </div>
-      <BackgroundComponent />
     </div>
   );
 }

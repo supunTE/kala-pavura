@@ -38,7 +38,7 @@ export class UserFirestoreDao {
     }
   }
 
-  private async addUser(
+  public async addUser(
     uid: string,
     user: KalaPavuraUser,
   ): Promise<KalaPavuraExtendedUser> {
@@ -49,14 +49,16 @@ export class UserFirestoreDao {
     };
 
     const docRef = doc(collection(this.db, 'users'), uid);
+    // TODO: [FIRESTORE] Add firebase rules
     await setDoc(docRef, extendedUser);
     return extendedUser;
   }
 
-  private async updateLastLoginAt(uid: string): Promise<Date> {
+  public async updateLastLoginAt(uid: string): Promise<Date> {
     const docRef = doc(collection(this.db, 'users'), uid);
 
     const timestamp = new Date();
+    // TODO: [FIRESTORE] Add firebase rules. (avoid updating joinedAt, uid, etc)
     await updateDoc(docRef, {
       lastLoginAt: new Date(),
     });
