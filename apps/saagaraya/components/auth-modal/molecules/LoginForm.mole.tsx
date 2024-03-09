@@ -37,7 +37,7 @@ export function LoginForm({ forceClose }: LoginFormProps) {
   } = useForm<LoginInputs>({
     defaultValues,
     resolver: yupResolver(loginSchema),
-    mode: 'onBlur',
+    mode: 'onChange',
   });
 
   const onSubmit: SubmitHandler<LoginInputs> = async (data) => {

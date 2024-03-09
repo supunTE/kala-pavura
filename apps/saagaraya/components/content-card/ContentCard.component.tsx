@@ -67,7 +67,7 @@ export function ContentCardComponent({
 
         <PostInteractionButtonAtom id={id} />
 
-        <h6 className={cs('text-xs text-white/40', 'line-clamp-3 leading-6')}>
+        <h6 className={cs('text-sm text-white/40', 'line-clamp-3 leading-6')}>
           {description}
         </h6>
 

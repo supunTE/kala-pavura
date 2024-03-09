@@ -15,10 +15,6 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@/assets/*": ["apps/saagaraya/assets/*"],
-      "@/components/*": ["apps/saagaraya/components/*"],
-      "@/modules/*": ["apps/saagaraya/modules/*"],
-      "@/constants/*": ["libs/constants/src/*"],
       "@kala-pavura/constants": ["libs/constants/src/index.ts"],
       "@kala-pavura/db": ["libs/db/src/index.ts"],
       "@kala-pavura/models": ["libs/models/src/index.ts"],

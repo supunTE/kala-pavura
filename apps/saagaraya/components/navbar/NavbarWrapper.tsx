@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import cs from 'classnames';
 import { usePathname } from 'next/navigation';
 
@@ -12,6 +12,9 @@ type NavbarWrapperProps = {
 
 export default function NavbarWrapper({ children }: NavbarWrapperProps) {
   const [isNavHidden, setIsNavHidden] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  const navbarRef = useRef<HTMLDivElement>(null);
 
   const pathname = usePathname();
 
@@ -20,12 +23,34 @@ export default function NavbarWrapper({ children }: NavbarWrapperProps) {
     setIsNavHidden(isPathOnExcludeList);
   }, []);
 
+  useEffect(() => {
+    const onScroll = () => {
+      if (!navbarRef.current) {
+        return setIsScrolled(false);
+      }
+      console.log(navbarRef.current.offsetHeight);
+
+      const scrollY = window.scrollY;
+      setIsScrolled(scrollY > navbarRef.current.offsetHeight);
+    };
+
+    window.addEventListener('scroll', onScroll);
+
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+    };
+  }, []);
+
   if (isNavHidden) return null;
 
   return (
     <div
+      ref={navbarRef}
       className={cs(
-        'absolute flex w-full items-start justify-center gap-6 px-8 py-4',
+        'z-40 flex w-full items-start justify-center gap-6 px-8 py-4',
+        {
+          'fixed top-0': isScrolled,
+        },
       )}>
       {children}
     </div>

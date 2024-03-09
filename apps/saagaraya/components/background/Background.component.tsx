@@ -1,25 +1,23 @@
+'use client';
+
 import cs from 'classnames';
 import Image from 'next/image';
 
 import { ocean_background } from '@/assets/images/bg';
 
 type BackgroundComponentProps = {
-  moreDarken?: boolean;
-};
-
-const backgroundComponentDefaults = {
-  moreDarken: false,
+  enableDarkOverlay: boolean;
 };
 
 export function BackgroundComponent({
-  moreDarken = false,
-}: BackgroundComponentProps = backgroundComponentDefaults) {
+  enableDarkOverlay,
+}: BackgroundComponentProps) {
   return (
-    <div className="absolute inset-0 -z-20 h-full w-full">
+    <div className="fixed inset-0 -z-20">
       <div
         className={cs('absolute inset-0 ', {
-          'bg-zinc-900/60': !moreDarken,
-          'bg-zinc-900/80 backdrop-blur-sm': moreDarken,
+          'bg-zinc-900/60': !enableDarkOverlay,
+          'bg-zinc-900/80 backdrop-blur-sm': enableDarkOverlay,
         })}
       />
       <Image
@@ -27,7 +25,7 @@ export function BackgroundComponent({
         fill={true}
         alt="background"
         priority={true}
-        className="-z-20 object-cover"
+        className="fixed -z-20"
       />
     </div>
   );

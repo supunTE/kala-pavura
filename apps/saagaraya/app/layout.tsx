@@ -17,10 +17,10 @@ export const metadata = {
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
-      <body>
-        <BackgroundComponent moreDarken={true} />
+      <body className="h-screen">
         <Providers>
-          <div className="z-0 h-full overflow-y-auto">
+          <BackgroundComponent enableDarkOverlay={true} />
+          <div className="flex flex-col min-h-full transition-all duration-300">
             <Navbar />
             {children}
           </div>

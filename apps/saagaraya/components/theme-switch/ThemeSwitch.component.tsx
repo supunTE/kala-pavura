@@ -53,7 +53,7 @@ export const ThemeSwitchComponent = () => {
   const selectedOption = options.find((option) => option.value === theme);
 
   return (
-    <div className="z-10 flex cursor-pointer flex-row-reverse items-center">
+    <div className="z-[100] flex cursor-pointer flex-row-reverse items-center">
       <div
         onClick={() => setIsOpen((prev) => !prev)}
         className={cs(

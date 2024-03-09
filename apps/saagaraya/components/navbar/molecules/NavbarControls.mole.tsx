@@ -5,6 +5,7 @@ import { Button, Input, Loader } from '@mantine/core';
 import { CaretRight, MagnifyingGlass, SignOut } from '@phosphor-icons/react';
 import cs from 'classnames';
 import Image from 'next/image';
+import Link from 'next/link';
 
 import { UserLoginState } from '@kala-pavura/models';
 
@@ -22,15 +23,34 @@ export function NavbarControls() {
 
   const { user } = useAuth();
 
+  const navLinks = [
+    {
+      title: 'පවුර',
+      href: '/feed',
+    },
+    {
+      title: 'ලියන්න',
+      href: '/write/story',
+    },
+    {
+      title: 'සමූහ',
+      href: '/groups',
+    },
+    {
+      title: 'අපි ගැන',
+      href: '/about',
+    },
+  ];
+
   return (
-    <div className="z-10 flex items-center justify-center gap-4">
+    <div className="z-50 flex items-center justify-center gap-4">
       <Input
         size="xs"
         fz="lg"
         radius="xl"
         placeholder="කිමිදෙන්න"
         autoComplete="off"
-        className={cs('h-full w-80')}
+        className={'h-full w-80'}
         leftSection={<MagnifyingGlass size={14} weight="light" />}
       />
 
@@ -50,6 +70,29 @@ export function NavbarControls() {
         isLoginClicked={isLoginClicked}
         loggingButton={loginButton}
       />
+
+      <div className="absolute top-16 mt-4 max-h-0 overflow-hidden rounded-full bg-zinc-700 opacity-0 shadow-sm backdrop-blur-md duration-300 group-hover/navbar:max-h-72 group-hover/navbar:p-4 group-hover/navbar:opacity-100">
+        <ul
+          className={cs(
+            'flex items-center justify-center gap-2',
+            'text-sm font-bold',
+          )}>
+          {navLinks.map((link) => (
+            <>
+              <li key={link.title}>
+                <Link
+                  href={link.href}
+                  className="hover:ring-curious-blue-400 rounded-full bg-gray-300/10 p-2 px-4 transition-all duration-300 hover:bg-gray-300/40 hover:text-zinc-100 hover:ring-1">
+                  {link.title}
+                </Link>
+              </li>
+              {navLinks.indexOf(link) !== navLinks.length - 1 && (
+                <li className="text-lg opacity-30">∙</li>
+              )}
+            </>
+          ))}
+        </ul>
+      </div>
 
       <AuthModalComponent
         isOpen={isLoginClicked}

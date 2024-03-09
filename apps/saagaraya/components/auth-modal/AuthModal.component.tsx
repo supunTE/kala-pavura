@@ -9,7 +9,7 @@ import { DisplayLanguage } from '@kala-pavura/models';
 import { google_icon, surfer_vector } from '@/assets/images';
 import { LoginForm, RegisterForm } from '@/components/auth-modal/molecules';
 import { useAuth } from '@/modules/context';
-import { useFont } from '@/modules/hooks';
+import { useFontStatic } from '@/modules/hooks';
 
 type AuthModalComponentProps = {
   isOpen: boolean;
@@ -20,7 +20,9 @@ export const AuthModalComponent = forwardRef<
   HTMLDivElement,
   AuthModalComponentProps
 >(({ isOpen, forceClose }, ref) => {
-  const { primaryFont: primaryEnglishFont } = useFont(DisplayLanguage.English);
+  const { primaryFont: primaryEnglishFont } = useFontStatic(
+    DisplayLanguage.English,
+  );
 
   const { googleLogin } = useAuth();
 
@@ -39,7 +41,7 @@ export const AuthModalComponent = forwardRef<
         {
           hidden: !isOpen,
         },
-        'w-96 rounded-md p-5',
+        'z-50 w-96 rounded-md p-5',
         'flex flex-col items-center justify-center',
         'bg-blue-300 dark:bg-zinc-800',
         'border border-zinc-400/20',

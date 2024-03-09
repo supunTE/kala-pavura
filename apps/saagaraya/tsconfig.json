@@ -16,7 +16,19 @@
         "name": "next"
       }
     ],
-    "types": ["jest", "node", "./types.d.ts"]
+    "types": ["jest", "node", "./types.d.ts"],
+    "baseUrl": "../../",
+    "paths": {
+      "@/assets/*": ["apps/saagaraya/assets/*"],
+      "@/components/*": ["apps/saagaraya/components/*"],
+      "@/modules/*": ["apps/saagaraya/modules/*"],
+      "@/constants/*": ["libs/constants/src/*"],
+      "@/models/*": ["apps/saagaraya/models/*"],
+      "@kala-pavura/constants": ["libs/constants/src/index.ts"],
+      "@kala-pavura/db": ["libs/db/src/index.ts"],
+      "@kala-pavura/models": ["libs/models/src/index.ts"],
+      "@kala-pavura/services": ["libs/services/src/index.ts"]
+    }
   },
   "include": [
     "**/*.ts",

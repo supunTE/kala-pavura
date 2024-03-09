@@ -76,7 +76,7 @@ export function RegisterForm({ forceClose }: RegisterFormProps) {
   };
 
   return (
-    <div className="max-h-[250px] overflow-hidden overflow-y-auto rounded-b-lg bg-neutral-200/40 dark:bg-neutral-900/40">
+    <div className="max-h-[250px] overflow-hidden overflow-y-auto rounded-lg bg-neutral-200/40 dark:bg-neutral-900/40">
       <form
         className="flex h-full w-full flex-col items-center justify-center p-4"
         onSubmit={handleSubmit((data) => onSubmit(data))}>
