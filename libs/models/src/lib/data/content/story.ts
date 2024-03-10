@@ -1,4 +1,4 @@
-import { GroupId } from '../group';
+import { GroupId } from '../../workspace';
 
 import { CoverData } from './cover';
 
