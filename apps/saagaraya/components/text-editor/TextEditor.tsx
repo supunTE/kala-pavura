@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useMemo, useState } from 'react';
+import { useLocalStorage } from '@mantine/hooks';
 import { EditorOptions } from '@tiptap/core';
 import { Color } from '@tiptap/extension-color';
 import { FontFamily } from '@tiptap/extension-font-family';
@@ -12,12 +13,27 @@ import { EditorContent, mergeAttributes, useEditor } from '@tiptap/react';
 import { StarterKit } from '@tiptap/starter-kit';
 import cs from 'classnames';
 
+import { Logger } from '@kala-pavura/services';
+
 import { ToolbarCoreButtonGroup, TransliteratorBox } from '@/components/atoms';
 import { Select, SelectOption } from '@/components/select';
+import {
+  BeforeInputEvent,
+  transliterateHandlersBeforeInput,
+  transliterateHandlersOnKeyDown,
+} from '@/components/text-editor/helpers/editor-transliterate-handlers';
 import { TransliterateText } from '@/modules/utils';
 
+import { AUTO_LOCAL_SAVE_INTERVAL } from '../../constants';
+
 import { TextEditorControls } from './elements';
-import { EditorFontKeys, editorFonts, editorFontsArray } from './models';
+import {
+  defaultMenuPosition,
+  EditorContentPosition,
+  EditorFontKeys,
+  editorFonts,
+  editorFontsArray,
+} from './models';
 import {
   ToolBarButtonGroup,
   ToolBarColorPickerButton,
@@ -91,93 +107,75 @@ const textEditorOptions: Partial<EditorOptions> = {
   },
 };
 
-const defaultMenuPosition = {
-  top: 0,
-  left: 0,
-  display: 'none',
+type TextEditorProps = {
+  id: string;
 };
 
-export const TextEditor = () => {
+export const TextEditor = ({ id }: TextEditorProps) => {
   const [selectedFontKey, setSelectedFontKey] = useState(
     EditorFontKeys.NotoSansSinhala,
   );
-  const [menuPosition, setMenuPosition] = useState(defaultMenuPosition);
-  const trnasliterateTextKey = 'text-editor';
+  const [menuPosition, setMenuPosition] =
+    useState<EditorContentPosition>(defaultMenuPosition);
+  const textEditorTrnasliterateKey = 'text-editor';
   const [enableTransliteration, setEnableTransliteration] = useState(false);
   const editor = useEditor(textEditorOptions);
 
-  const handleBeforeInput = (e: any) => {
+  const [editorContentLastLocalSaveAt, setEditorContentLastLocalSaveAt] =
+    useState<Date | null>(null);
+  const [editorContentLocalStorage, setEditorContentLocalStorage] =
+    useLocalStorage<string | null>({
+      key: 'editor-content',
+      defaultValue: null,
+    });
+
+  const logger = new Logger(`Text editor - ${id}`);
+
+  useEffect(() => {
+    // If there's content in local storage, set it to the editor
+    if (editorContentLocalStorage) {
+      logger.log('Setting editor content from local storage');
+      editor?.commands.setContent(editorContentLocalStorage);
+    }
+
+    // Save content to local storage for each 1 minute
+    const interval = setInterval(() => {
+      if (!editor) return;
+      setEditorContentLocalStorage(editor.getHTML());
+      const currentTimestamp = new Date();
+      setEditorContentLastLocalSaveAt(currentTimestamp);
+      logger.log('Editor content saved to local storage', {
+        currentTimestamp,
+      });
+    }, AUTO_LOCAL_SAVE_INTERVAL);
+
+    return () => clearInterval(interval);
+  }, [editor]);
+
+  const handleBeforeInput = (e: BeforeInputEvent) => {
     if (!editor || !enableTransliteration) return;
     e.preventDefault();
 
-    switch (e.data) {
-      case ' ': {
-        const transliteratedText =
-          TransliterateText.removeAndGetTransliteratedText(
-            trnasliterateTextKey,
-          );
-        if (!editor) return;
-        const transaction = editor.state.tr.insertText(
-          transliteratedText ? transliteratedText + ' ' : ' ',
-        );
-        editor.view.dispatch(transaction);
-        setMenuPosition(defaultMenuPosition);
-        break;
-      }
-      default: {
-        e.preventDefault();
-        TransliterateText.storeTransliteratedText(trnasliterateTextKey, e.data);
-
-        const pos = editor.view.coordsAtPos(editor.state.selection.head);
-        setMenuPosition({
-          top: pos.top + window.scrollY,
-          left: pos.left + window.scrollX,
-          display: 'block',
-        });
-        break;
-      }
-    }
+    transliterateHandlersBeforeInput(e, textEditorTrnasliterateKey, {
+      editor,
+      setMenuPosition,
+    });
   };
 
   const handleKeyDown = (e: any) => {
-    if (!enableTransliteration) return;
+    if (!editor || !enableTransliteration) return;
 
-    switch (e.key) {
-      case 'Backspace': {
-        const isThereTextToTransliterate =
-          TransliterateText.isThereTextToTransliterate(trnasliterateTextKey);
-        if (!isThereTextToTransliterate) return;
-        e.preventDefault();
-        TransliterateText.backspaceTransliteratedText(trnasliterateTextKey);
-        break;
-      }
-      case 'Enter': {
-        const transliteratedText =
-          TransliterateText.removeAndGetTransliteratedText(
-            trnasliterateTextKey,
-          );
-        if (!editor) return;
-        const transaction = editor.state.tr.insertText(
-          transliteratedText ? transliteratedText : '',
-        );
-        editor.view.dispatch(transaction);
-        setMenuPosition(defaultMenuPosition);
-        break;
-      }
-      case 'Escape': {
-        setMenuPosition(defaultMenuPosition);
-        TransliterateText.removeAndGetTransliteratedText(trnasliterateTextKey);
-        break;
-      }
-      default: {
-        break;
-      }
-    }
+    transliterateHandlersOnKeyDown(e, textEditorTrnasliterateKey, {
+      editor,
+      setMenuPosition,
+    });
   };
 
   useEffect(() => {
     setMenuPosition(defaultMenuPosition);
-    TransliterateText.removeAndGetTransliteratedText(trnasliterateTextKey);
+    TransliterateText.removeAndGetTransliteratedText(
+      textEditorTrnasliterateKey,
+    );
   }, [enableTransliteration]);
 
   const editorControls = useMemo(() => {
@@ -252,7 +250,7 @@ export const TextEditor = () => {
       </div>
       {editor && (
         <div style={{ position: 'absolute', ...menuPosition }}>
-          <TransliteratorBox id={trnasliterateTextKey} />
+          <TransliteratorBox id={textEditorTrnasliterateKey} />
         </div>
       )}
       <EditorContent
@@ -260,9 +258,19 @@ export const TextEditor = () => {
         onBeforeInput={handleBeforeInput}
         onKeyDown={handleKeyDown}
         className={cs(
-          'h-full overflow-hidden bg-neutral-200 dark:bg-neutral-800',
+          'h-full w-full max-w-full overflow-hidden bg-neutral-200 dark:bg-neutral-800',
         )}
       />
+      <div className="h-12 w-full bg-neutral-400 dark:bg-neutral-900">
+        <div className="flex h-full items-center justify-center">
+          {editorContentLastLocalSaveAt && (
+            <span className="text-xs text-neutral-500 dark:text-neutral-400">
+              Last saved locally at{' '}
+              {editorContentLastLocalSaveAt.toLocaleTimeString()}
+            </span>
+          )}
+        </div>
+      </div>
     </div>
   );
 };

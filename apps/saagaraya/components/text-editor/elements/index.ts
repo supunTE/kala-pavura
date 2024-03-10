@@ -1,1 +1,1 @@
-export * from './toolbar-buttton-groups';
+export * from './toolbar-button-groups';

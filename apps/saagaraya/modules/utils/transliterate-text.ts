@@ -21,6 +21,7 @@ export class TransliterateText {
     const text = this.textsToTransliterate.get(id);
     if (!text) return;
     const newText = text.slice(0, -1);
+    if (newText === '') return this.textsToTransliterate.delete(id);
     this.textsToTransliterate.set(id, newText);
   }
 
