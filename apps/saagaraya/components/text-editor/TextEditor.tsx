@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useMemo, useState } from 'react';
+import { EditorOptions } from '@tiptap/core';
 import { Color } from '@tiptap/extension-color';
 import { FontFamily } from '@tiptap/extension-font-family';
 import { Heading } from '@tiptap/extension-heading';
@@ -23,7 +24,7 @@ import {
   ToolBarIconButton,
 } from './molecules';
 
-const textEditorOptions = {
+const textEditorOptions: Partial<EditorOptions> = {
   extensions: [
     StarterKit.configure({
       heading: false,
@@ -67,6 +68,25 @@ const textEditorOptions = {
   editorProps: {
     attributes: {
       class: 'outline-none h-full overflow-auto p-4',
+    },
+    transformPastedHTML: (html) => {
+      console.log('html', html);
+      // Use a DOMParser to parse the pasted HTML
+      const doc = new DOMParser().parseFromString(html, 'text/html');
+
+      // Remove color-related styles
+      doc.querySelectorAll('*[style]').forEach((element) => {
+        const style = element.getAttribute('style');
+        if (style) {
+          // Remove only color-related styles
+          element.setAttribute('style', style.replace(/color\s*:[^;]+;/gi, ''));
+        }
+      });
+
+      // Serialize the modified HTML back to a string
+      const modifiedHTML = new XMLSerializer().serializeToString(doc);
+      console.log('modifiedHTML', modifiedHTML);
+      return modifiedHTML;
     },
   },
 };
@@ -142,6 +162,7 @@ export const TextEditor = () => {
         );
         editor.view.dispatch(transaction);
         setMenuPosition(defaultMenuPosition);
+        break;
       }
       case 'Escape': {
         setMenuPosition(defaultMenuPosition);
@@ -174,6 +195,11 @@ export const TextEditor = () => {
           'rounded-2xl bg-gray-400/20 min-[1000px]:rounded-full',
           'z-10',
         )}>
+        <div
+          className="flex items-center gap-2"
+          onClick={() => console.log('editor.getHTML()', editor.getHTML())}>
+          Export
+        </div>
         <ToolBarButtonGroup
           toolBarButtons={editorControls?.textFormattingButtons || []}
           editor={editor}
@@ -234,7 +260,7 @@ export const TextEditor = () => {
         onBeforeInput={handleBeforeInput}
         onKeyDown={handleKeyDown}
         className={cs(
-          'overflow-none h-full bg-neutral-200 dark:bg-neutral-800',
+          'h-full overflow-hidden bg-neutral-200 dark:bg-neutral-800',
         )}
       />
     </div>

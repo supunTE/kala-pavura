@@ -1,13 +1,13 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { ReactNode, useEffect, useRef, useState } from 'react';
 import cs from 'classnames';
 import { usePathname } from 'next/navigation';
 
 import { PATHS_TO_EXCLUDE_NAVBAR } from '../../constants';
 
 type NavbarWrapperProps = {
-  children: React.ReactNode;
+  children: ReactNode;
 };
 
 export default function NavbarWrapper({ children }: NavbarWrapperProps) {
@@ -21,7 +21,7 @@ export default function NavbarWrapper({ children }: NavbarWrapperProps) {
   useEffect(() => {
     const isPathOnExcludeList = PATHS_TO_EXCLUDE_NAVBAR.includes(pathname);
     setIsNavHidden(isPathOnExcludeList);
-  }, []);
+  }, [pathname]);
 
   useEffect(() => {
     const onScroll = () => {

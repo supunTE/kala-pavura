@@ -1,5 +1,7 @@
-export type KalaPavuraUser = {
-  uid: string;
+export type UserId = string;
+
+export type User = {
+  uid: UserId;
   username: string;
   email: string;
   profilePicture: string;
@@ -8,7 +10,7 @@ export type KalaPavuraUser = {
   phoneNumber: string | null;
 };
 
-export type KalaPavuraExtendedUser = KalaPavuraUser & {
+export type ExtendedUser = User & {
   joinedAt: Date;
   lastLoginAt: Date;
 };

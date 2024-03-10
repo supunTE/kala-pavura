@@ -7,7 +7,7 @@ import {
   updateDoc,
 } from 'firebase/firestore';
 
-import { KalaPavuraExtendedUser, KalaPavuraUser } from '@kala-pavura/models';
+import { ExtendedUser, User } from '@kala-pavura/models';
 
 import 'firebase/firestore';
 
@@ -19,16 +19,13 @@ export class UserFirestoreDao {
     const docSnap = await getDoc(docRef);
 
     if (docSnap.exists()) {
-      return docSnap.data() as KalaPavuraExtendedUser;
+      return docSnap.data() as ExtendedUser;
     } else {
       return null;
     }
   }
 
-  public async addOrUpdateUser(
-    uid: string,
-    user: KalaPavuraUser,
-  ): Promise<KalaPavuraExtendedUser> {
+  public async addOrUpdateUser(uid: string, user: User): Promise<ExtendedUser> {
     const existingUser = await this.getUser(uid);
     if (existingUser) {
       await this.updateLastLoginAt(uid);
@@ -38,11 +35,8 @@ export class UserFirestoreDao {
     }
   }
 
-  public async addUser(
-    uid: string,
-    user: KalaPavuraUser,
-  ): Promise<KalaPavuraExtendedUser> {
-    const extendedUser: KalaPavuraExtendedUser = {
+  public async addUser(uid: string, user: User): Promise<ExtendedUser> {
+    const extendedUser: ExtendedUser = {
       ...user,
       joinedAt: new Date(),
       lastLoginAt: new Date(),

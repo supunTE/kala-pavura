@@ -8,11 +8,7 @@ import {
 
 import { DEFAULT_USER_IMG_URL } from '@kala-pavura/constants';
 import { UserFirestoreDao } from '@kala-pavura/db';
-import {
-  KalaPavuraExtendedUser,
-  KalaPavuraUser,
-  UserLoginState,
-} from '@kala-pavura/models';
+import { ExtendedUser, User, UserLoginState } from '@kala-pavura/models';
 import { Logger } from '@kala-pavura/services';
 
 import { db, firebaseApp } from '../../firebase.config';
@@ -25,13 +21,13 @@ const logger = new Logger('Firebase Auth Context');
 
 type AuthStateChangeListenerProps = {
   updateLoginState: (userLoginState: UserLoginState) => void;
-  setUser: (user: KalaPavuraExtendedUser | null) => void;
+  setUser: (user: ExtendedUser | null) => void;
 };
 
 export class FirebaseAuthService {
   /** Use through auth context */
   static googleLoginWithPopup = async (
-    setUser: (user: KalaPavuraExtendedUser) => void,
+    setUser: (user: ExtendedUser) => void,
   ) => {
     const result = await signInWithPopup(auth, provider);
 
@@ -64,7 +60,7 @@ export class FirebaseAuthService {
     username: string,
     emailAddress: string,
     password: string,
-    setUser: (user: KalaPavuraExtendedUser) => void,
+    setUser: (user: ExtendedUser) => void,
   ) => {
     const result = await createUserWithEmailAndPassword(
       auth,
@@ -74,7 +70,7 @@ export class FirebaseAuthService {
 
     /// Add or update user in firestore
     const user = result.user;
-    const userObj: KalaPavuraUser = {
+    const userObj: User = {
       username,
       uid: user.uid,
       email: emailAddress,
@@ -95,7 +91,7 @@ export class FirebaseAuthService {
   static passwordLogin = async (
     emailAddress: string,
     password: string,
-    setUser: (user: KalaPavuraExtendedUser) => void,
+    setUser: (user: ExtendedUser) => void,
   ) => {
     const result = await signInWithEmailAndPassword(
       auth,

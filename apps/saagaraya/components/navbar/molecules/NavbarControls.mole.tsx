@@ -1,6 +1,6 @@
 'use client';
 
-import { MutableRefObject } from 'react';
+import { Fragment, MutableRefObject } from 'react';
 import { Button, Input, Loader } from '@mantine/core';
 import { CaretRight, MagnifyingGlass, SignOut } from '@phosphor-icons/react';
 import cs from 'classnames';
@@ -78,8 +78,8 @@ export function NavbarControls() {
             'text-sm font-bold',
           )}>
           {navLinks.map((link) => (
-            <>
-              <li key={link.title}>
+            <Fragment key={link.title}>
+              <li>
                 <Link
                   href={link.href}
                   className="hover:ring-curious-blue-400 rounded-full bg-gray-300/10 p-2 px-4 transition-all duration-300 hover:bg-gray-300/40 hover:text-zinc-100 hover:ring-1">
@@ -89,7 +89,7 @@ export function NavbarControls() {
               {navLinks.indexOf(link) !== navLinks.length - 1 && (
                 <li className="text-lg opacity-30">∙</li>
               )}
-            </>
+            </Fragment>
           ))}
         </ul>
       </div>

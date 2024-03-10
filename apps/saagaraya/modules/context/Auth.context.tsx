@@ -8,7 +8,7 @@ import {
   useState,
 } from 'react';
 
-import { KalaPavuraExtendedUser, UserLoginState } from '@kala-pavura/models';
+import { ExtendedUser, UserLoginState } from '@kala-pavura/models';
 import { Logger } from '@kala-pavura/services';
 
 import { FirebaseAuthService } from '@/modules/services';
@@ -20,7 +20,7 @@ import {
 } from '../../../../libs/models/src/lib/errors';
 
 type AuthContextType = {
-  user: KalaPavuraExtendedUser | null;
+  user: ExtendedUser | null;
   userLoggingState: UserLoginState;
   googleLogin: () => Promise<boolean>;
   passwordRegister: (
@@ -46,19 +46,18 @@ type AuthContextProviderProps = {
   children: ReactNode;
 };
 export const AuthContextProvider = ({ children }: AuthContextProviderProps) => {
-  const [kalaPavuraUser, setKalaPavuraUser] =
-    useState<KalaPavuraExtendedUser | null>(null);
+  const [kalaPavuraUser, setKalaPavuraUser] = useState<ExtendedUser | null>(
+    null,
+  );
   const [userLoggingState, setUserLoggingState] = useState<UserLoginState>(
     UserLoginState.LoadingData,
   );
 
   const googleLogin = async (): Promise<boolean> => {
     try {
-      await FirebaseAuthService.googleLoginWithPopup(
-        (user: KalaPavuraExtendedUser) => {
-          setKalaPavuraUser(user);
-        },
-      );
+      await FirebaseAuthService.googleLoginWithPopup((user: ExtendedUser) => {
+        setKalaPavuraUser(user);
+      });
       logger.log('User login with Google');
       return true;
     } catch (e) {
@@ -77,7 +76,7 @@ export const AuthContextProvider = ({ children }: AuthContextProviderProps) => {
         userName,
         emailAddress,
         password,
-        (user: KalaPavuraExtendedUser) => {
+        (user: ExtendedUser) => {
           setKalaPavuraUser(user);
         },
       );
@@ -116,7 +115,7 @@ export const AuthContextProvider = ({ children }: AuthContextProviderProps) => {
       await FirebaseAuthService.passwordLogin(
         emailAddress,
         password,
-        (user: KalaPavuraExtendedUser) => {
+        (user: ExtendedUser) => {
           setKalaPavuraUser(user);
         },
       );
@@ -151,7 +150,7 @@ export const AuthContextProvider = ({ children }: AuthContextProviderProps) => {
 
     const unsubscribe = FirebaseAuthService.authStateChangeListener({
       updateLoginState: loginStateChangeHandler,
-      setUser: (user: KalaPavuraExtendedUser | null) => {
+      setUser: (user: ExtendedUser | null) => {
         setKalaPavuraUser(user);
         logger.log('User auth state changed', user);
       },
