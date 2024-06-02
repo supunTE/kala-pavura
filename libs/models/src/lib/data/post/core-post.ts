@@ -1,20 +1,14 @@
-import { StoryChapterId, StoryId } from '../content/story';
+import { ContentTypes, StoryChapterId, StoryId } from '../content';
 
 export type PostId = `P-${string}`;
-
-export enum PostContextTypes {
-  Story = 'STORY',
-  StoryChapter = 'STORY_CHAPTER',
-  Poem = 'POEM',
-}
 
 // TODO: Include poem id
 type ContextId = StoryId | StoryChapterId;
 
 export type CorePost = {
   id: PostId;
-  contextType: PostContextTypes;
-  contextId: ContextId;
+  contentType: ContentTypes;
+  contentId: ContextId;
   description: string;
   timestamps: PostTimestamps;
 };
