@@ -37,7 +37,7 @@ export function NavbarControls() {
       href: '/groups',
     },
     {
-      title: 'අපි ගැන',
+      title: 'අප ගැන',
       href: '/about',
     },
   ];

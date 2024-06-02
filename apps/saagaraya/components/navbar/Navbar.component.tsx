@@ -8,11 +8,10 @@ import { ThemeSwitchComponent } from '@/components/theme-switch';
 
 import { NavbarControls } from './molecules';
 
-
 export function Navbar() {
   return (
     <NavbarWrapper>
-      <div className='group/navbar'>
+      <div className="group/navbar">
         <div className="flex items-start justify-center gap-6">
           <Link href="/">
             <div
@@ -64,7 +63,6 @@ export function Navbar() {
             </div>
           </nav>
         </div>
-
       </div>
     </NavbarWrapper>
   );

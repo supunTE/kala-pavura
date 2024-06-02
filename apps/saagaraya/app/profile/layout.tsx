@@ -3,6 +3,8 @@ import cs from 'classnames';
 
 import { DisplayLanguage } from '@kala-pavura/models';
 
+import { BackgroundComponent } from '@/components/background';
+import { Navbar } from '@/components/navbar';
 import { useFontStatic } from '@/modules/hooks';
 
 type ProfileLayoutProps = {
@@ -17,9 +19,15 @@ export default function ProfileLayout({
   const { primaryFont } = useFontStatic(DisplayLanguage.Sinhala);
 
   return (
-    <div className={cs(primaryFont.className, 'z-10 h-screen')}>
-      {profileCover}
-      {children}
-    </div>
+    <>
+      <BackgroundComponent enableDarkOverlay={true} />
+      <div className="absolute z-50 h-screen w-full">
+        <Navbar />
+      </div>
+      <div className={cs(primaryFont.className, 'z-10 h-screen')}>
+        {profileCover}
+        {children}
+      </div>
+    </>
   );
 }

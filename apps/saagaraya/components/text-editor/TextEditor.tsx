@@ -186,11 +186,11 @@ export const TextEditor = ({ id }: TextEditorProps) => {
   if (!editor) return null;
 
   return (
-    <div className={cs('flex h-screen flex-col')}>
+    <div className={cs('flex h-screen flex-col gap-4 p-4')}>
       <div
         className={cs(
-          'm-6 flex flex-wrap items-center gap-2 p-2',
-          'rounded-2xl bg-gray-400/20 min-[1000px]:rounded-full',
+          'flex flex-wrap items-center gap-2 p-2',
+          'rounded-xl bg-gray-400/20',
           'z-10',
         )}>
         <div
@@ -258,17 +258,16 @@ export const TextEditor = ({ id }: TextEditorProps) => {
         onBeforeInput={handleBeforeInput}
         onKeyDown={handleKeyDown}
         className={cs(
-          'h-full w-full max-w-full overflow-hidden bg-neutral-200 dark:bg-neutral-800',
+          'h-full w-full max-w-full overflow-hidden rounded-lg border border-neutral-600 bg-neutral-200 p-4 dark:bg-neutral-800',
         )}
       />
-      <div className="h-12 w-full bg-neutral-400 dark:bg-neutral-900">
+      <div className="h-12 w-full rounded-lg bg-neutral-400 dark:bg-neutral-900">
         <div className="flex h-full items-center justify-center">
-          {editorContentLastLocalSaveAt && (
-            <span className="text-xs text-neutral-500 dark:text-neutral-400">
-              Last saved locally at{' '}
-              {editorContentLastLocalSaveAt.toLocaleTimeString()}
-            </span>
-          )}
+          <span className="text-xs text-neutral-500 dark:text-neutral-400">
+            {editorContentLastLocalSaveAt
+              ? `Last saved locally at ${editorContentLastLocalSaveAt.toLocaleTimeString()}`
+              : 'Not saved locally'}
+          </span>
         </div>
       </div>
     </div>

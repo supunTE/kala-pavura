@@ -1,8 +1,5 @@
 import { ReactNode } from 'react';
 
-import { BackgroundComponent } from '@/components/background';
-import { Navbar } from '@/components/navbar';
-
 import { Providers } from './providers';
 
 import './global.css';
@@ -19,9 +16,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     <html lang="en">
       <body className="h-screen">
         <Providers>
-          <BackgroundComponent enableDarkOverlay={true} />
-          <div className="flex flex-col min-h-full transition-all duration-300">
-            <Navbar />
+          <div className="flex min-h-full flex-col transition-all duration-300">
             {children}
           </div>
         </Providers>
