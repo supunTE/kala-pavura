@@ -222,7 +222,7 @@ export const TextEditor = ({ contentType }: TextEditorProps) => {
           })}>
           <span
             className={cs(
-              'rounded-md border border-neutral-200 p-2 px-4 dark:border-neutral-600',
+              'rounded-xl border border-neutral-200 p-2 px-4 dark:border-neutral-600',
               'focus:ring-curious-blue-400 outline-0 focus:ring-2',
             )}
             onClick={() => {
@@ -249,7 +249,7 @@ export const TextEditor = ({ contentType }: TextEditorProps) => {
           value={contentTitleValue}
           onChange={(e) => setContentTitleValue(e.target.value)}
           className={cs(
-            'focus:ring-curious-blue-400 rounded-md border border-neutral-200 p-2 px-4',
+            'focus:ring-curious-blue-400 rounded-xl border border-neutral-200 p-2 px-4',
             'outline-0 focus:ring-2 dark:border-neutral-600',
             {
               hidden: !isEditingContentTitle,
@@ -263,7 +263,7 @@ export const TextEditor = ({ contentType }: TextEditorProps) => {
       <div
         className={cs(
           'flex flex-wrap items-center gap-2 p-2',
-          'rounded-xl bg-gray-400/20',
+          'rounded-full bg-gray-400/20',
           'z-10',
         )}>
         <ToolBarButtonGroup

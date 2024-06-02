@@ -8,7 +8,7 @@ import { profile_sample } from '@/assets/images';
 
 export default function ProfileBar() {
   return (
-    <div className="z-5 flex h-1/2 w-full flex-col items-center justify-center rounded-b-3xl bg-gray-700/80 shadow-lg backdrop-blur-lg">
+    <div className="z-5 flex h-1/2 w-full flex-col items-center justify-center rounded-b-3xl bg-neutral-900/80 shadow-lg backdrop-blur-lg">
       <div className="h-full w-full p-2">
         <div className="relative h-full w-full overflow-hidden rounded-2xl">
           <Image
@@ -18,14 +18,14 @@ export default function ProfileBar() {
             className="h-full w-full object-cover"
           />
           <div className="absolute bottom-4 right-6">
-            <div className="text-curious-blue-900 rounded-full border border-blue-500 bg-blue-500/40 px-4 py-2 text-xs shadow-lg backdrop-blur-sm">
+            <div className="rounded-full border border-neutral-800 bg-white/40 px-4 py-2 text-sm text-black shadow-lg backdrop-blur-sm">
               Member since 2018
             </div>
           </div>
         </div>
       </div>
-      <div className="flex items-center justify-center gap-6 p-8">
-        <div className="from-curious-blue-600 via-curious-blue-500 to-curious-blue-400 rounded-full bg-gradient-to-r p-2">
+      <div className="flex items-center justify-center gap-8 p-8">
+        <div className="from-curious-blue-600 via-curious-blue-500 to-curious-blue-400 rounded-full bg-gradient-to-r p-1">
           <Image
             src={profile_sample}
             alt="profile"

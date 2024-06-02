@@ -7,7 +7,7 @@ import { Navbar } from '@/components/navbar';
 export default function FeedPage() {
   return (
     <>
-      <BackgroundComponent enableDarkOverlay={true} />
+      <BackgroundComponent />
       <Navbar />
 
       <div

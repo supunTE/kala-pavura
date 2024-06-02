@@ -20,8 +20,8 @@ export default function ProfileLayout({
 
   return (
     <>
-      <BackgroundComponent enableDarkOverlay={true} />
-      <div className="absolute z-50 h-screen w-full">
+      <BackgroundComponent />
+      <div className="absolute top-0 h-screen w-full">
         <Navbar />
       </div>
       <div className={cs(primaryFont.className, 'z-10 h-screen')}>

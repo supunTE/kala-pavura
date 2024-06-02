@@ -45,12 +45,9 @@ export default function NavbarWrapper({ children }: NavbarWrapperProps) {
 
   return (
     <div
-      ref={navbarRef}
       className={cs(
         'z-40 flex w-full items-start justify-center gap-6 px-8 py-4',
-        {
-          'fixed top-0': isScrolled,
-        },
+        'sticky top-0',
       )}>
       {children}
     </div>
