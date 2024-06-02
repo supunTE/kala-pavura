@@ -1,22 +1,20 @@
 import {
   createUserWithEmailAndPassword,
-  getAuth,
   GoogleAuthProvider,
   signInWithEmailAndPassword,
   signInWithPopup,
 } from 'firebase/auth';
 
 import { DEFAULT_USER_IMG_URL } from '@kala-pavura/constants';
-import { UserFirestoreDao } from '@kala-pavura/db';
+import { UserClientFirestoreDao } from '@kala-pavura/db';
 import { ExtendedUser, User, UserLoginState } from '@kala-pavura/models';
 import { Logger } from '@kala-pavura/services';
 
-import { db, firebaseApp } from '../../firebase.config';
+import { auth, db } from '../../firebase.config';
 
 const provider = new GoogleAuthProvider();
-const auth = getAuth(firebaseApp);
 
-const userFirestoreService = new UserFirestoreDao(db);
+const userFirestoreService = new UserClientFirestoreDao(db);
 const logger = new Logger('Firebase Auth Context');
 
 type AuthStateChangeListenerProps = {
@@ -110,9 +108,9 @@ export class FirebaseAuthService {
   };
 
   static authStateChangeListener = ({
-    updateLoginState,
-    setUser,
-  }: AuthStateChangeListenerProps) => {
+                                      updateLoginState,
+                                      setUser,
+                                    }: AuthStateChangeListenerProps) => {
     const existingUserId: string | null = null;
     return auth.onAuthStateChanged(async (user) => {
       if (user) {

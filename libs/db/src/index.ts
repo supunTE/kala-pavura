@@ -1,1 +1,1 @@
-export * from './lib/user.dao';
+export * from './lib/user.client.dao';

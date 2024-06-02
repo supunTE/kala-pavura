@@ -5,10 +5,21 @@ import { PaperPlaneTilt, UserPlus } from '@phosphor-icons/react';
 import Image from 'next/image';
 
 import { profile_sample } from '@/assets/images';
+import { useEffect } from 'react';
+import { getUser } from '@/actions/users';
 
 export default function ProfileBar() {
+  useEffect(() => {
+    const loadUser = async () => {
+      const userJSON = await getUser('JCQSutYB8VMwcIkNk8eKKabYSNU2');
+      console.log(userJSON);
+    };
+    loadUser();
+  }, []);
+
   return (
-    <div className="z-5 flex h-1/2 w-full flex-col items-center justify-center rounded-b-3xl bg-neutral-900/80 shadow-lg backdrop-blur-lg">
+    <div
+      className="z-5 flex h-1/2 w-full flex-col items-center justify-center rounded-b-3xl bg-neutral-900/80 shadow-lg backdrop-blur-lg">
       <div className="h-full w-full p-2">
         <div className="relative h-full w-full overflow-hidden rounded-2xl">
           <Image
@@ -18,14 +29,16 @@ export default function ProfileBar() {
             className="h-full w-full object-cover"
           />
           <div className="absolute bottom-4 right-6">
-            <div className="rounded-full border border-neutral-800 bg-white/40 px-4 py-2 text-sm text-black shadow-lg backdrop-blur-sm">
+            <div
+              className="rounded-full border border-neutral-800 bg-white/40 px-4 py-2 text-sm text-black shadow-lg backdrop-blur-sm">
               Member since 2018
             </div>
           </div>
         </div>
       </div>
       <div className="flex items-center justify-center gap-8 p-8">
-        <div className="from-curious-blue-600 via-curious-blue-500 to-curious-blue-400 rounded-full bg-gradient-to-r p-1">
+        <div
+          className="from-curious-blue-600 via-curious-blue-500 to-curious-blue-400 rounded-full bg-gradient-to-r p-1">
           <Image
             src={profile_sample}
             alt="profile"
@@ -51,7 +64,8 @@ export default function ProfileBar() {
                 radius="xl"
                 leftSection={<UserPlus size={18} />}
                 rightSection={
-                  <span className="text-curious-blue-800 flex h-full w-12 items-center justify-center rounded-full bg-blue-100/40 text-sm">
+                  <span
+                    className="text-curious-blue-800 flex h-full w-12 items-center justify-center rounded-full bg-blue-100/40 text-sm">
                     156
                   </span>
                 }>

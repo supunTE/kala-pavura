@@ -30,6 +30,11 @@
         "{workspaceRoot}/.eslintignore",
         "{workspaceRoot}/eslint.config.js"
       ]
+    },
+    "@nx/js:tsc": {
+      "cache": true,
+      "dependsOn": ["^build"],
+      "inputs": ["production", "^production"]
     }
   },
   "namedInputs": {
@@ -59,5 +64,13 @@
       }
     }
   },
-  "nxCloudAccessToken": "YTU4YjczZWQtZTBlYS00NDRmLWEzNGUtYjIzOGQ4ODQzYTEzfHJlYWQtd3JpdGU="
+  "nxCloudAccessToken": "YTU4YjczZWQtZTBlYS00NDRmLWEzNGUtYjIzOGQ4ODQzYTEzfHJlYWQtd3JpdGU=",
+  "plugins": [
+    {
+      "plugin": "@nx/eslint/plugin",
+      "options": {
+        "targetName": "lint"
+      }
+    }
+  ]
 }

@@ -1,18 +1,10 @@
-import {
-  collection,
-  doc,
-  Firestore,
-  getDoc,
-  setDoc,
-  updateDoc,
-} from 'firebase/firestore';
-
+import { collection, doc, Firestore, getDoc, setDoc, updateDoc } from 'firebase/firestore';
 import { ExtendedUser, User } from '@kala-pavura/models';
 
-import 'firebase/firestore';
 
-export class UserFirestoreDao {
-  constructor(private db: Firestore) {}
+export class UserClientFirestoreDao {
+  constructor(private db: Firestore) {
+  }
 
   async getUser(uid: string) {
     const docRef = doc(collection(this.db, 'users'), uid);
