@@ -2,7 +2,9 @@ import cs from 'classnames';
 
 import { ContentCardComponent, dummy_posts } from '@/components/content-card';
 
-export default function ProfilePage() {
+export default function ProfilePage(
+  { params }: { params: { id: string } }
+) {
   return (
     <div
       className={cs(

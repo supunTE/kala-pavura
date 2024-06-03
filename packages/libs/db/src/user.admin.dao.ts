@@ -12,9 +12,25 @@ export class UserAdminFirestoreDao {
     const docSnap = await docRef.get();
 
     if (docSnap.exists) {
-      return docSnap.data() as ExtendedUser;
+      return {
+        ...docSnap.data(),
+        joinedAt: new Date(docSnap.data()!.joinedAt.seconds * 1000),
+        lastLoginAt: new Date(docSnap.data()!.lastLoginAt.seconds * 1000),
+      } as ExtendedUser;
     } else {
       return null;
+    }
+  }
+
+  public async getUserByUsername(username: string) {
+    const usersRef = this.db.collection('users');
+    const query = usersRef.where('username', '==', username);
+    const querySnapshot = await query.get();
+
+    if (querySnapshot.empty || !querySnapshot.docs[0]) {
+      return null;
+    } else {
+      return querySnapshot.docs[0].data() as ExtendedUser;
     }
   }
 

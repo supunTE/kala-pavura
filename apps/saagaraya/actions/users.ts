@@ -11,6 +11,11 @@ export async function getUser(uid: string) {
   return JSON.stringify(extendedUser);
 }
 
+export async function getUserByUsername(username: string) {
+  const extendedUser = await userdao.getUserByUsername(username);
+  return JSON.stringify(extendedUser);
+}
+
 export async function addOrUpdateUser(uid: string, userJSON: string) {
   const user = UserSchema.parse(JSON.parse(userJSON));
   const extendedUser = await userdao.addOrUpdateUser(uid, user);
