@@ -1,0 +1,18 @@
+@layer tailwind {
+  @tailwind base;
+}
+@tailwind components;
+@tailwind utilities;
+
+:root[data-mantine-color-scheme='light'] {
+  --mantine-color-error: #ff0000 !important;
+}
+
+.mantine-InputWrapper-label{
+  font-weight: bold !important;
+}
+
+.mantine-InputWrapper-error{
+  font-weight: bold;
+  font-size: 0.7rem !important;
+}
