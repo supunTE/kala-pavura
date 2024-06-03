@@ -19,7 +19,7 @@ export default async function Index() {
   return (
     <>
       <Navbar />
-      <BackgroundComponent enableDarkOverlay={true} />
+      <BackgroundComponent />
       <div
         className={cs(
           primaryFont.className,
