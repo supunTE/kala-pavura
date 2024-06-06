@@ -3,17 +3,19 @@ import { singlishToUnicode } from 'sinhala-unicode-coverter';
 export class TransliterateText {
   private static textsToTransliterate: Map<string, string> = new Map();
 
+  static {
+    console.log('TransliterateText class initialized');
+  }
+
   public static storeTransliteratedText(id: string, text: string) {
-    const existingText = this.textsToTransliterate.get(id);
-    if (existingText) {
-      text = existingText + text;
-      this.textsToTransliterate.set(id, text);
-    } else this.textsToTransliterate.set(id, text);
+    const existingText = this.textsToTransliterate.get(id) || '';
+    const newText = existingText + text;
+    this.textsToTransliterate.set(id, newText);
   }
 
   public static getTransliteratedText(id: string) {
     const text = this.textsToTransliterate.get(id);
-    if (!text) return;
+    if (!text) return null;
     return singlishToUnicode(text);
   }
 
@@ -36,7 +38,11 @@ export class TransliterateText {
   public static removeAndGetTransliteratedText(id: string) {
     const text = this.textsToTransliterate.get(id);
     this.textsToTransliterate.delete(id);
-    if (!text) return;
+    if (!text) return null;
     return singlishToUnicode(text);
+  }
+
+  public static removeTransliteratedText(id: string) {
+    this.textsToTransliterate.delete(id);
   }
 }

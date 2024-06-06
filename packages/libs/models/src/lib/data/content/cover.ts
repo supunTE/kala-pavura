@@ -1,5 +1,8 @@
 export type CoverImage = {
-  url: string;
+  id: string;
+  thumbnail: string;
+  small: string;
+  regular: string;
   imageAuthor: string;
   alt: string;
 };

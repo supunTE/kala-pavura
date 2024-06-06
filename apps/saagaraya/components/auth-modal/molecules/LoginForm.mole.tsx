@@ -7,6 +7,7 @@ import cs from "classnames";
 import { InferType, object, string } from "yup";
 
 import { MAX_EMAIL_UI_LIMIT, MAX_PASSWORD_LENGTH } from "@kala-pavura/globals";
+
 import { useAuth } from "@/modules/context";
 
 const loginSchema = object({
@@ -62,8 +63,8 @@ export function LoginForm({ forceClose }: LoginFormProps) {
           radius="xl"
           label="ඊ-තැපැල් ලිපිනය"
           placeholder="user@email.com"
-          maxLength={MAX_EMAIL_UI_LIMIT}
           className={cs("w-full")}
+          maxLength={MAX_EMAIL_UI_LIMIT}
           error={errors.email?.message}
           {...register("email")}
         />
