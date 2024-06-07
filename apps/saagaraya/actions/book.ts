@@ -1,5 +1,7 @@
 'use server';
 
+import { revalidatePath } from 'next/cache';
+
 import { BookFirestoreDao } from '@kala-pavura/db';
 
 import { CreateBookInputs, createBookServerSchema } from '@/schemas/book';
@@ -25,10 +27,16 @@ export async function createBook(bookData: CreateBookInputs, userId: string) {
       userId,
       validatedFields.data.coverImage,
     );
+    revalidatePath('/user/[id]');
     return JSON.stringify(response);
   } catch (e) {
     return JSON.stringify({
       error: e instanceof Error ? e.message : e,
     });
   }
+}
+
+export async function getBooksByUserId(userId: string) {
+  const response = await bookdao.getBooksByUserId(userId);
+  return response;
 }

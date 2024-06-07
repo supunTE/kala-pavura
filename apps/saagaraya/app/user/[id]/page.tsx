@@ -1,10 +1,15 @@
 import cs from 'classnames';
 
-import { ContentCardComponent, dummy_posts } from '@/components/content-card';
+import { getBooksByUserId } from '@/actions/book';
+import { ContentCardComponent } from '@/components/content-card';
 
-export default function ProfilePage(
-  { params }: { params: { id: string } }
-) {
+export default async function ProfilePage({
+  params,
+}: {
+  params: { id: string };
+}) {
+  const books = await getBooksByUserId(params.id);
+
   return (
     <div
       className={cs(
@@ -12,14 +17,14 @@ export default function ProfilePage(
         'grid grid-cols-1 gap-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5',
         'mt-10 max-w-screen-2xl',
       )}>
-      {dummy_posts.map((post) => (
+      {books.map((book) => (
         <ContentCardComponent
-          key={post.id}
-          id={post.id}
-          title={post.title}
-          imageSrc={post.imageSrc}
-          imageAlt={post.imageAlt}
-          description={post.description}
+          key={book.id}
+          id={book.id}
+          title={book.title}
+          imageSrc={book.coverData.image.regular}
+          imageAlt={book.coverData.image.alt}
+          description={book.description}
         />
       ))}
     </div>

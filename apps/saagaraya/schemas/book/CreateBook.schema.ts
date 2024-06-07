@@ -8,34 +8,6 @@ import {
 } from '@kala-pavura/globals';
 import { ImageSource } from '@kala-pavura/models';
 
-// export const createBookUISchema = object({
-//   name: string().required('පොතට නමක් ඇතුළත් කරන්න.'),
-//   description: string().required('පොත සඳහා විස්තරයක් ඇතුළත් කරන්න.'),
-//   coverImage: object({
-//     id: string().required('පිටකවර රූපය තෝරන්න.'),
-//     thumbnail: string(),
-//     small: string(),
-//     regular: string(),
-//     imageAuthor: string(),
-//     alt: string(),
-//     source: string().oneOf(Object.values(ImageSource)),
-//   }).required(),
-// });
-
-// export const createBookServerSchema = z.object({
-//   name: z.string(),
-//   description: z.string(),
-//   coverImage: z.object({
-//     id: z.string(),
-//     thumbnail: z.string(),
-//     small: z.string(),
-//     regular: z.string(),
-//     imageAuthor: z.string(),
-//     alt: z.string(),
-//     source: z.nativeEnum(ImageSource),
-//   }),
-// });
-
 const getSchema = (isUI: boolean) =>
   z.object({
     name: z
