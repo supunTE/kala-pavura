@@ -29,6 +29,9 @@
       ],
       "@/constants/*": [
         "apps/saagaraya/constants/*"
+      ],
+      "@/schemas/*": [
+        "apps/saagaraya/schemas/*"
       ]
       // "@kala-pavura/constants": ["@repo/globals"],
       // "@kala-pavura/db": ["@repo/globals"],

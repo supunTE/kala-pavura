@@ -1,36 +1,30 @@
 import { useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
+import { zodResolver } from '@hookform/resolvers/zod';
 import { Button, Drawer, TextInput } from '@mantine/core';
 import { useDebouncedCallback } from '@mantine/hooks';
 import cs from 'classnames';
 import Image from 'next/image';
-import { InferType, object, string } from 'yup';
 
 import {
   MAX_BOOK_DESCRIPTION_LENGTH,
   MAX_BOOK_NAME_LENGTH,
 } from '@kala-pavura/globals';
-import { CoverImage } from '@kala-pavura/models';
+import { CoverImage, ImageSource, Story } from '@kala-pavura/models';
 
+import { createBook } from '@/actions/book';
 import { getPhotos } from '@/actions/photo';
 import {
   TransliteratorInput,
   TransliteratorTextArea,
 } from '@/components/atoms';
+import { useAuth } from '@/modules/context';
 import { NotificationsService } from '@/modules/services';
-
-const createBookSchema = object({
-  name: string().required('පොතට නමක් ඇතුළත් කරන්න.'),
-  description: string().required('පොත සඳහා විස්තරයක් ඇතුළත් කරන්න.'),
-  coverImage: string().required('පිටකවර රූපය තෝරන්න.'),
-});
-type CreateBookInputs = InferType<typeof createBookSchema>;
-const defaultValues: CreateBookInputs = {
-  name: '',
-  description: '',
-  coverImage: '',
-};
+import {
+  createBookDefaultValues,
+  CreateBookInputs,
+  createBookUISchema,
+} from '@/schemas/book';
 
 type CreateBookProps = {
   opened: boolean;
@@ -46,10 +40,12 @@ export function CreateBookPanel({ opened, close }: CreateBookProps) {
     formState: { errors },
     reset,
   } = useForm<CreateBookInputs>({
-    defaultValues,
-    resolver: yupResolver(createBookSchema),
+    defaultValues: createBookDefaultValues,
+    resolver: zodResolver(createBookUISchema),
     mode: 'onChange',
   });
+
+  const { user } = useAuth();
 
   const [isCreating, setIsCreating] = useState(false);
   const [searchedOnce, setSearchedOnce] = useState(false);
@@ -70,17 +66,34 @@ export function CreateBookPanel({ opened, close }: CreateBookProps) {
   }, 500);
 
   const onSubmit: SubmitHandler<CreateBookInputs> = async (data) => {
+    if (!user) {
+      return NotificationsService.showErrorToast(
+        'පුරනය වී නොමැත!',
+        'කරුණාකර පොතක් සැදීමට පෙර ඔබේ පවතින ගිණුමට පුරනය වීම හෝ නව ගිණුමකින් ලියාපදිංචි වන්න.',
+      );
+    }
     setIsCreating(true);
-    const result = false;
+    // TODO: Create utils
+    const result = JSON.parse(await createBook(data, user.uid)) as
+      | Story
+      | { error: string }
+      | undefined;
     setIsCreating(false);
-    close();
-    if (!result) {
+
+    // TODO: write validator utils
+    if (!result || 'error' in result) {
       return NotificationsService.showErrorToast(
         'දෝෂයක්!',
         'කිසියම් ගැටළුවක් මතු විය. පසුව උත්සාහ කරන්න.',
       );
     }
+
+    NotificationsService.showSuccessToast(
+      'සාර්ථකයි!',
+      `${data.name} පොත සාදන ලදි.`,
+    );
     reset();
+    close();
   };
 
   const nameInputTrnasliterateKey = 'name-input';
@@ -135,7 +148,7 @@ export function CreateBookPanel({ opened, close }: CreateBookProps) {
           value={searchQuery}
           data-autofocus
           withAsterisk
-          error={errors.coverImage?.message}
+          error={errors.coverImage?.id?.message}
         />
 
         {loading ? (
@@ -156,7 +169,10 @@ export function CreateBookPanel({ opened, close }: CreateBookProps) {
                 height={128}
                 onClick={() => {
                   setSelectedImage(result.id);
-                  setValue('coverImage', result.id);
+                  setValue('coverImage', {
+                    ...result,
+                    source: ImageSource.Unsplash,
+                  });
                   clearErrors('coverImage');
                 }}
                 className={cs(

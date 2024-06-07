@@ -1,3 +1,8 @@
+export enum ImageSource {
+  Unsplash = 'unsplash',
+  Upload = 'upload',
+}
+
 export type CoverImage = {
   id: string;
   thumbnail: string;
@@ -5,6 +10,7 @@ export type CoverImage = {
   regular: string;
   imageAuthor: string;
   alt: string;
+  source: ImageSource;
 };
 
 export type CoverLike = {
