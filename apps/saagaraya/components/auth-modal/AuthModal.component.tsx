@@ -13,13 +13,14 @@ import { useFontStatic } from '@/modules/hooks';
 
 type AuthModalComponentProps = {
   isOpen: boolean;
-  forceClose: () => void;
+  className?: string;
+  forceClose(): void;
 };
 
 export const AuthModalComponent = forwardRef<
   HTMLDivElement,
   AuthModalComponentProps
->(({ isOpen, forceClose }, ref) => {
+>(({ isOpen, forceClose, className }, ref) => {
   const { primaryFont: primaryEnglishFont } = useFontStatic(
     DisplayLanguage.English,
   );
@@ -37,14 +38,15 @@ export const AuthModalComponent = forwardRef<
       ref={ref}
       className={cs(
         'text-black dark:text-white',
-        'absolute right-4 top-14',
         {
           hidden: !isOpen,
         },
+        'absolute top-0',
         'z-50 w-96 rounded-md p-5',
         'flex flex-col items-center justify-center',
         'bg-blue-300 dark:bg-zinc-800',
         'border border-zinc-400/20',
+        className,
       )}>
       <Image src={surfer_vector} alt="surfer vector" width={200} />
 
