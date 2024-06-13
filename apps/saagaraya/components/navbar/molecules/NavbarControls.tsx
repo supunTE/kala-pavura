@@ -1,13 +1,10 @@
 'use client';
 
-import { useDispatch } from 'react-redux';
 import { Input } from '@mantine/core';
 import { MagnifyingGlass } from '@phosphor-icons/react';
 import Image from 'next/image';
 
-import { AuthModalComponent } from '@/components/auth-modal';
 import { useAuth } from '@/modules/context';
-import { Dispatch } from '@/store/store';
 
 import { LoggingButton } from './LoggingButton';
 import { NavLinks } from './NavLinks';

@@ -1,8 +1,9 @@
 "use server";
 
-import { adminDB } from "../firebase-admin.config";
 import { UserAdminFirestoreDao } from "@kala-pavura/db";
 import { UserSchema } from "@kala-pavura/models";
+
+import { adminDB } from "../firebase-admin.config";
 
 const userdao = new UserAdminFirestoreDao(adminDB);
 

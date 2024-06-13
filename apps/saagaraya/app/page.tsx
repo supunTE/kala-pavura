@@ -1,14 +1,13 @@
 import cs from 'classnames';
+import Image from 'next/image';
 
 import { DisplayLanguage } from '@kala-pavura/models';
 
+import { saagaraya_title_logo } from '@/assets/images';
 import { BackgroundComponent } from '@/components/background';
 import { Navbar } from '@/components/navbar';
-import { useFontStatic } from '@/modules/hooks';
 import { LoggingButton } from '@/components/navbar/molecules/LoggingButton';
-import { saagaraya_title_logo } from '@/assets/images';
-
-import Image from 'next/image';
+import { useFontStatic } from '@/modules/hooks';
 
 export const metadata = {
   title: 'Saagaraya🌊 Home',

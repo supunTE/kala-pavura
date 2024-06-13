@@ -6,9 +6,10 @@ import {
 } from "firebase/auth";
 
 import { UserClientFirestoreDao } from "@kala-pavura/db";
+import { DEFAULT_USER_IMG_URL } from "@kala-pavura/globals";
 import { ExtendedUser, User, UserLoginState } from "@kala-pavura/models";
 import { Logger } from "@kala-pavura/services";
-import { DEFAULT_USER_IMG_URL } from "@kala-pavura/globals";
+
 import { auth, db } from "../../firebase.config";
 
 const provider = new GoogleAuthProvider();

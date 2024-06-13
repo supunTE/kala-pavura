@@ -1,15 +1,15 @@
 'use client';
 
+import { useDispatch, useSelector } from 'react-redux';
 import { Button, Loader } from '@mantine/core';
 import { CaretRight, SignOut } from '@phosphor-icons/react';
 import cs from 'classnames';
 
 import { UserLoginState } from '@kala-pavura/models';
 
-import { useAuth } from '@/modules/context';
-import { useDispatch, useSelector } from 'react-redux';
-import { Dispatch, RootState } from '@/store/store';
 import { LOGIN_OR_REGISTER_DIALOG } from '@/constants/dialogs';
+import { useAuth } from '@/modules/context';
+import { Dispatch, RootState } from '@/store/store';
 
 export function LoggingButton() {
   const { userLoggingState, logout } = useAuth();

@@ -1,9 +1,8 @@
-import 'server-only';
-
-import { cert, initializeApp } from 'firebase-admin/app';
 import { apps } from 'firebase-admin';
-
+import { cert, initializeApp } from 'firebase-admin/app';
 import { getFirestore } from 'firebase-admin/firestore';
+
+import 'server-only';
 
 // Initialize Firebase
 const adminJSON = JSON.parse(process.env.FIREBASE_ADMIN_JSON || '');

@@ -4,7 +4,7 @@
   "scripts": {
     "build": "turbo build --filter saagaraya",
     "dev": "turbo dev --filter saagaraya",
-    "lint": "turbo lint",
+    "lint": "turbo lint -- --fix",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "test": "turbo test"
   },

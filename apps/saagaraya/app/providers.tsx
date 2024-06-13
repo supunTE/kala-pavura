@@ -7,10 +7,10 @@ import { Notifications } from '@mantine/notifications';
 import { ThemeProvider } from 'next-themes';
 
 import { noto_sans_sinhala } from '@/assets/fonts';
+import { AuthModalComponent } from '@/components/auth-modal';
 import { AuthContextProvider } from '@/modules/context';
 
 import { store } from '../store';
-import { AuthModalComponent } from '@/components/auth-modal';
 
 type ProvidersProps = {
   children: ReactNode;

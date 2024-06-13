@@ -1,6 +1,6 @@
-import { TextEditor } from '@/components/text-editor';
-
 import { ContentTypes } from '@kala-pavura/models';
+
+import { TextEditor } from '@/components/text-editor';
 
 export default function WriteStoryPage() {
   return (

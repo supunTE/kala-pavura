@@ -1,8 +1,6 @@
 'use client';
 
-import { Button } from '@mantine/core';
 import {
-  CaretRight,
   GridFour,
   MagnifyingGlass,
   PencilSimple,
@@ -16,10 +14,8 @@ import { usePathname } from 'next/navigation';
 import { DisplayLanguage } from '@kala-pavura/models';
 
 import { saagaraya_logo } from '@/assets/images';
-import { AuthModalComponent } from '@/components/auth-modal';
 import { useAuth } from '@/modules/context';
-import { useFontStatic, useMouseClickOpen } from '@/modules/hooks';
-import { LoggingButton } from '@/components/navbar/molecules/LoggingButton';
+import { useFontStatic } from '@/modules/hooks';
 
 const navLinks = [
   {
