@@ -1,1 +1,1 @@
-export * from './AuthModal.component';
+export * from './AuthModalComponent';

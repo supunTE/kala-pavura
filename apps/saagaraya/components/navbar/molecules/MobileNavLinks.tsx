@@ -19,6 +19,7 @@ import { saagaraya_logo } from '@/assets/images';
 import { AuthModalComponent } from '@/components/auth-modal';
 import { useAuth } from '@/modules/context';
 import { useFontStatic, useMouseClickOpen } from '@/modules/hooks';
+import { LoggingButton } from '@/components/navbar/molecules/LoggingButton';
 
 const navLinks = [
   {
@@ -47,13 +48,13 @@ export function MobileNavLinks() {
   const { userLoggingState } = useAuth();
   const pathname = usePathname();
   const { primaryFont } = useFontStatic(DisplayLanguage.Sinhala);
-
-  const {
-    isOpened: isLoginClicked,
-    clickableAreaRef: loginButton,
-    insideContainerRef: authModalContainer,
-    forceClose: forceCloseAuthModal,
-  } = useMouseClickOpen();
+  //
+  // const {
+  //   isOpened: isLoginClicked,
+  //   clickableAreaRef: loginButton,
+  //   insideContainerRef: authModalContainer,
+  //   forceClose: forceCloseAuthModal,
+  // } = useMouseClickOpen();
 
   return (
     <>
@@ -100,23 +101,7 @@ export function MobileNavLinks() {
             );
           })}
         </div>
-        <Button
-          className=""
-          ref={loginButton}
-          variant="filled"
-          color="#2da1e4"
-          size="xs"
-          radius="xl"
-          rightSection={<CaretRight size={16} weight="light" />}>
-          එක්වන්න
-        </Button>
       </div>
-      <AuthModalComponent
-        isOpen={isLoginClicked}
-        forceClose={forceCloseAuthModal}
-        ref={authModalContainer}
-        className="absolute inset-0"
-      />
     </>
   );
 }

@@ -1,4 +1,5 @@
-import { MutableRefObject } from 'react';
+'use client';
+
 import { Button, Loader } from '@mantine/core';
 import { CaretRight, SignOut } from '@phosphor-icons/react';
 import cs from 'classnames';
@@ -6,18 +7,15 @@ import cs from 'classnames';
 import { UserLoginState } from '@kala-pavura/models';
 
 import { useAuth } from '@/modules/context';
+import { useDispatch, useSelector } from 'react-redux';
+import { Dispatch, RootState } from '@/store/store';
+import { LOGIN_OR_REGISTER_DIALOG } from '@/constants/dialogs';
 
-type LoggingButtonProps = {
-  isLoginClicked: boolean;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  loggingButton: MutableRefObject<any>;
-};
-
-export function LoggingButton({
-  isLoginClicked,
-  loggingButton,
-}: LoggingButtonProps) {
+export function LoggingButton() {
   const { userLoggingState, logout } = useAuth();
+  const dispatch = useDispatch<Dispatch>()
+  const loginDialogVisibility = useSelector((state: RootState) => state.ui.dialogVisibility[LOGIN_OR_REGISTER_DIALOG] || false);
+
 
   switch (userLoggingState) {
     case UserLoginState.LoadingData:
@@ -46,12 +44,15 @@ export function LoggingButton({
     case UserLoginState.LoggedOut:
       return (
         <Button
-          ref={loggingButton}
+          onClick={() => dispatch.ui.updateDialogVisibilityReducer({
+            key: LOGIN_OR_REGISTER_DIALOG,
+            visible: true,
+          })}
           variant="filled"
           color="#2da1e4"
           size="xs"
           radius="xl"
-          className={cs({ 'opacity-50': isLoginClicked })}
+          className={cs({ 'opacity-50': loginDialogVisibility })}
           rightSection={<CaretRight size={16} weight="light" />}>
           එක්වන්න
         </Button>

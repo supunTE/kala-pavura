@@ -4,19 +4,15 @@ import { Dispatch, RootModel } from '../store';
 
 import {
   toggleUIBackgroundDarkness,
-  ToggleUIBackgroundDarknessPayload,
-} from './effects/background';
+  UpdateDialogVisibilityPayload,
+} from './effects/dialog-visibility';
 import { uiInitialState } from './initial-state';
 import * as reducers from './reducers';
+import { UIStateModel } from '@/models/store/ui';
+import { effects } from './effects';
 
 export const UIStore = createModel<RootModel>()({
   state: uiInitialState,
   reducers,
-  effects: (dispatch: Dispatch) => ({
-    toggleUIBackgroundDarkness: (
-      payload: ToggleUIBackgroundDarknessPayload,
-    ) => {
-      toggleUIBackgroundDarkness(dispatch, payload);
-    },
-  }),
+  effects,
 });

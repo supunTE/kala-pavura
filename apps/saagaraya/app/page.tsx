@@ -1,12 +1,14 @@
 import cs from 'classnames';
-import Image from 'next/image';
 
 import { DisplayLanguage } from '@kala-pavura/models';
 
-import { saagaraya_title_logo } from '@/assets/images/logo';
 import { BackgroundComponent } from '@/components/background';
 import { Navbar } from '@/components/navbar';
 import { useFontStatic } from '@/modules/hooks';
+import { LoggingButton } from '@/components/navbar/molecules/LoggingButton';
+import { saagaraya_title_logo } from '@/assets/images';
+
+import Image from 'next/image';
 
 export const metadata = {
   title: 'Saagaraya🌊 Home',
@@ -23,9 +25,9 @@ export default async function Index() {
       <div
         className={cs(
           primaryFont.className,
-          'flex h-full w-full flex-1 items-center justify-center',
+          'flex w-full flex-1 flex-col gap-4 items-center justify-center',
         )}>
-        <Image
+       <Image
           src={saagaraya_title_logo}
           width={500}
           height={300}
@@ -33,6 +35,10 @@ export default async function Index() {
           priority={true}
           className={cs('-mt-16 backdrop-filter')}
         />
+        <div className="sm:hidden">
+        <LoggingButton/>
+
+        </div>
       </div>
     </>
   );

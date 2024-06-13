@@ -44,10 +44,10 @@ const defaultValues: LoginInputs = {
 };
 
 type RegisterFormProps = {
-  forceClose: () => void;
+  close: () => void;
 };
 
-export function RegisterForm({forceClose}: RegisterFormProps) {
+export function RegisterForm({close}: RegisterFormProps) {
   const {passwordRegister} = useAuth();
   const [isRegistering, setIsRegistering] = useState(false);
 
@@ -73,7 +73,7 @@ export function RegisterForm({forceClose}: RegisterFormProps) {
     if (!result) return;
 
     reset();
-    forceClose();
+    close();
   };
 
   return (

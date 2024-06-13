@@ -23,10 +23,10 @@ const defaultValues: LoginInputs = {
 };
 
 type LoginFormProps = {
-  forceClose: () => void;
+  close: () => void;
 };
 
-export function LoginForm({ forceClose }: LoginFormProps) {
+export function LoginForm({ close }: LoginFormProps) {
   const { passwordLogin } = useAuth();
   const [isLoggingIn, setIsLoggingIn] = useState(false);
 
@@ -48,7 +48,7 @@ export function LoginForm({ forceClose }: LoginFormProps) {
     if (!result) return;
 
     reset();
-    forceClose();
+    close();
   };
 
   return (

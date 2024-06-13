@@ -32,7 +32,11 @@
       ],
       "@/schemas/*": [
         "apps/saagaraya/schemas/*"
-      ]
+      ],
+      "@/store/*": [
+        "apps/saagaraya/store/*"
+      ],
+
       // "@kala-pavura/constants": ["@repo/globals"],
       // "@kala-pavura/db": ["@repo/globals"],
       // "@kala-pavura/models": ["libs/models/src/index.ts"],

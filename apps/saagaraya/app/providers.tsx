@@ -10,6 +10,7 @@ import { noto_sans_sinhala } from '@/assets/fonts';
 import { AuthContextProvider } from '@/modules/context';
 
 import { store } from '../store';
+import { AuthModalComponent } from '@/components/auth-modal';
 
 type ProvidersProps = {
   children: ReactNode;
@@ -27,6 +28,7 @@ export function Providers({ children }: ProvidersProps) {
           <MantineProvider theme={theme}>
             <Notifications position="bottom-right" limit={5} />
             <ColorSchemeScript defaultColorScheme="auto" />
+            <AuthModalComponent/>
             {children}
           </MantineProvider>
         </ThemeProvider>
